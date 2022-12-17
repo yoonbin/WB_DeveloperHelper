@@ -1,0 +1,5 @@
+﻿SELECT A.*
+  FROM CIFCIRBF A
+ WHERE 1=1
+   AND ROWNUM < 100
+;

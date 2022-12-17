@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+	<startup>
+		<supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7.2" />
+	</startup>
+
+	<appSettings>
+		<!--개발 소스에서는 전체적인 구성을 관리 하고, 개발기/ 운영기 / 개발자 로컬/  템플릿 별로 정리된 config를 배포하도록 관리한다.-->
+		<!-- ********************************  Local/Dev/Prod 공통 적용  *************************************** -->
+		<add key="__KEY_TOKEN_KEY__" value="tEphVmR1J6MY6r8HB9bIcIs7kxg89uHiQPiKkWrQHrFU77fFLg8ic/7e/agVQy7FDEaxQVsBwo/BV8ohz/9WidCcYCmaX3fw7kxCpmz6mJWjJYdmIESCVQOt5kcy2SQ3" />
+		<add key="__KEY_TOKEN_IV__" value="doTaYteD78OoFtQ5n5uP+srWYK4qgwMp7ElkRkzBBtuQmv5X69KYL/yRtJceBAzZnLs6bZayk1lcfPAKvIgwLQ==" />
+		<!-- 구분 : 공통,   구성정보명: 'WCF 통신 설정'-->
+		<add key="KeyOfBHSTimeout" value="60" />
+		<add key="KeyOfBHSMaxConnection" value="10000" />
+		<add key="KeyOfBHSListenBacklogs" value="10000" />
+		<add key="KeyOfBHSMaxReceivedMessageSize" value="2147483647" />
+		<add key="KeyOfBHSMaxBufferSize" value="2147483647" />
+		<add key="KeyOfBHSMaxBufferPoolSize" value="2147483647" />
+		<add key="KeyOfBHSMaxStringContentLength" value="2147483647" />
+		<add key="KeyOfBHSMaxArrayLength" value="2147483647" />
+		<add key="KeyOfBHSMaxBytesPerRead" value="2147483647" />
+		<add key="KeyOfBHSMaxDepth" value="2147483647" />
+		<add key="KeyOfBHSMaxNameTableCharCount" value="2147483647" />
+
+		<!--===================================================접속 정보===================================================-->
+		<!-- 구분: '공통',  구성정보명: '미들웨어 URL 운영기 '-->
+		<add key="URI_KEY" value="net.tcp://10.17.26.45:7779/WCFBHSManagement" />
+
+		<!-- ********************************  Local 전용 : ( 개발 / 운영기 제거 ) *************************************** -->
+		<!--운영기-->
+		<!-- 구분: 'DB연결 문자열',  구성정보명: '기본 연결 문자열'-->
+		<add key="SQLConnectionString" value="server=HISDEVMSSQL;database=OLTPCommonLog;pwd=!tjdnfeoquddnjs1;user id=sa;Pooling=True;Min Pool Size=5;Max Pool Size=200;Load Balance Timeout=360;Connection Lifetime=360;Connect Timeout=60;Enlist=True;" />
+		<!-- 구분: 'DB연결 문자열',  구성정보명: '기본 연결 문자열'-->
+		<add key="OracleConnectionString" value="Data Source=CNUHSTG;User Id=XCOM;Password=ez123" />
+		<!-- 구분: 'DB연결 문자열',  구성정보명: 'EQS'-->
+		<add key="OracleQueryStorage_ConnectionString" value="Data Source=CNUHSTG;User Id=XEQS;Password=ez123" />
+		<!-- 구분: 'DB연결 문자열',  구성정보명: '업무공통'-->
+		<add key="COMOracleConnectionString" value="Data Source=CNUHSTG;User Id=XCOM;Password=ez123" />
+		<!-- 구분: 'DB연결 문자열',  구성정보명: '진료'-->
+		<add key="MEAOracleConnectionString" value="Data Source=CNUHSTG;User Id=XMED;Password=ez123" />
+		<!-- 구분: 'DB연결 문자열',  구성정보명: '간접진료'-->
+		<!--<add key="SUPOracleConnectionString" value="Data Source=EHIS;User Id=XSUP;Password=E5!his_Xsup" />-->
+		<add key="SUPOracleConnectionString" value="Data Source=CNUHSTG;User Id=XSUP;Password=ez123" />
+		<!-- 구분: 'DB연결 문자열',  구성정보명: '원무_보험'-->
+		<add key="BILOracleConnectionString" value="Data Source=CNUHSTG;User Id=XBIL;Password=ez123" />
+		<!-- 구분: 'DB연결 문자열',  구성정보명: 'ERP/구매재고'-->
+		<add key="MISOracleConnectionString" value="Data Source=CNUHSTG;User Id=XMIS;Password=ez123" />
+		<!-- 구분: 'DB연결 문자열',  구성정보명: 'ERP/인사,급여'-->
+		<add key="GAAOracleConnectionString" value="Data Source=CNUHSTG;User Id=XGAB;Password=ez123" />
+		<!-- 구분: 'DB연결 문자열',  구성정보명: '전자서명'-->
+		<add key="SIGOracleConnectionString" value="Data Source=CNUHSTG;User Id=XSIG;Password=ez123" />
+		<!-- 구분: 'DB연결 문자열',  구성정보명: '권한관리'-->
+		<add key="EAMOracleConnectionString" value="Data Source=CNUHSTG;User Id=XEAM;Password=ez123" />
+		<!-- 구분: 'DB연결 문자열',  구성정보명: 'CRM'-->
+		<add key="CRMOracleConnectionString" value="Data Source=CNUHSTG;User Id=XCRM;Password=ez123" />
+
+		<add key="MetaOracleConnectionString" value="Data Source=CNUHDEV;User Id=Udataware;Password=dataware" />
+		<!-- 구분: '공통',  구성정보명: '개발 환경 Root 경로'-->
+		<add key="LocalRootPath" value="D:\HISSolutions" />
+		<!-- 구분: '공통',  구성정보명: '기본 프로바이더타입'-->
+		<add key="KeyOfQueryProviderType" value="ORACLE" />
+	</appSettings>
+</configuration>

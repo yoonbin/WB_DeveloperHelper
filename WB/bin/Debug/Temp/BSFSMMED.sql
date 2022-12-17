@@ -1,0 +1,6 @@
+﻿SELECT A.*
+  FROM BSFSMMED A --메르스환자정보
+ WHERE 1=1
+   AND HSP_TP_CD = '01'
+   AND ROWNUM < 100
+;

@@ -1,0 +1,146 @@
+﻿<Window x:Class="WB.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:WB"
+        Loaded="Window_Loaded"
+        WindowState="Maximized"
+        xmlns:b="clr-namespace:WB.Common"
+        mc:Ignorable="d"
+        PreviewMouseDown="Window_PreviewMouseDown"
+        Title="WB" Height="850" Width="1300">
+
+    <Window.DataContext>
+        <local:ViewModelBase />
+    </Window.DataContext>
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="RECOURCE_DICTIONARY/ResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <b:CheckBoxConverters x:Key="chkConv"/>
+            <b:ReverseEnableConverter x:Key="EnableConv"/>
+            <b:VisibleConverterV3 x:Key="visConv"/>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="27"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="grdMsgBox" Panel.ZIndex="2000"  Height="90"  Visibility="Collapsed" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="45" Background="#FF2E2D2D" Grid.Column="1" Margin="10,0,10,0">
+                <TextBlock x:Name="tbMsgBox" Text="저장 완료." Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" FontWeight="ExtraBold" Margin="30,0,30,0" />
+            </Border>
+        </Grid>
+        <Grid x:Name="grdYesNoMsgBox" Panel.ZIndex="2000"  Height="90" Visibility="Collapsed" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border BorderBrush="Black" BorderThickness="1,1,1,1" CornerRadius="45" Background="#FF2E2D2D" Grid.Column="1" Margin="10,0,10,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="tbYesNoMsgBox" Text="검색어가 없으면 전체 Object를 조회하여 시간이 오래걸릴 수 있습니다. &#10;그럼에도 조회하시겠습니까?" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" FontWeight="ExtraBold" Margin="30,2"  Grid.ColumnSpan="2" Height="Auto" MinHeight="40" Width="264"/>
+                    <Button Grid.Row="1" Content="YES" Margin="20,0,0,0" HorizontalContentAlignment="Right" Background="#FF2E2D2D" Foreground="White" FontWeight="Bold" FontSize="30" BorderThickness="0" BorderBrush="Transparent" Padding="0" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Height="40" Width="50" Click="Button_Click"/>
+                    <Button Grid.Row="1" Grid.Column="1" Margin="0,0,20,0" HorizontalContentAlignment="Left" Content="NO" Background="#FF2E2D2D" Foreground="White" FontWeight="Bold" FontSize="30"  BorderThickness="0" BorderBrush="Transparent" Padding="0"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Height="40" Width="46" Click="Button_Click_1"/>
+                </Grid>
+            </Border>
+        </Grid>
+        <Grid x:Name="grdLoading" Panel.ZIndex="2000"  Height="130"  Visibility="Collapsed" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="1" Margin="10,0,10,0">
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image x:Name="imgLoading" HorizontalAlignment="Center" Height="130" VerticalAlignment="Center" Width="130" Source="/IMAGE/Stop.png"/>
+                    <Label Content="Loading" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold" />
+                </Grid>
+            </Border>
+        </Grid>
+        <Grid>
+            <Border BorderThickness="0,0,0,0" BorderBrush="{StaticResource SearchAreaDarkBorderBrush}" Background="{StaticResource SearchAreaBackground}">
+                <Border BorderThickness="1,1,1,1" BorderBrush="{StaticResource SearchAreaLightBorderBrush}">
+                    <DockPanel Height="20" LastChildFill="False">
+                        <Border BorderBrush="DimGray" BorderThickness="5,0,0,0" Margin="3,0,0,0"/>
+                        <RadioButton x:Name="rdoDev" Content="DB1" VerticalAlignment="Center" Margin="5,0,0,0" GroupName="rdoDb" Checked="rdoDev_Checked"/>
+                        <RadioButton x:Name="rdoApp" Content="DB2" VerticalAlignment="Center" Margin="5,0,0,0" GroupName="rdoDb" Checked="rdoApp_Checked"/>
+                        <ComboBox x:Name="cboDB1" Width="100" Margin="10,0,0,0" SelectedIndex="0" VerticalAlignment="Center" Visibility="Visible">
+
+                        </ComboBox>
+                        <ComboBox x:Name="cboDB2" Width="100" Margin="10,0,0,0" SelectedIndex="0" VerticalAlignment="Center" Visibility="Collapsed">
+
+                        </ComboBox>
+                        <Button Content="+" Style="{StaticResource btnDefault}" FontSize="12" Width="23" Margin="3,0,0,0" Click="btnAddTab_Click" Visibility="{Binding POPUP_YN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource visConv}, ConverterParameter='N'}"/>
+                        <Button Content="-" Style="{StaticResource btnDefault}" FontSize="12" Width="23" Margin="3,0,0,0" Click="btnCloseTab_Click" Visibility="{Binding POPUP_YN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource visConv}, ConverterParameter='N'}"/>
+                        <Button x:Name="btnDefault" Style="{StaticResource btnDefault}" FontSize="12" Content="Default" Width="50" Margin="3,0,0,0" Click="btnDefault_Click" Visibility="{Binding POPUP_YN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource visConv}, ConverterParameter='N'}"/>
+                        <Button x:Name="btnMemo" Style="{StaticResource btnDefault}" FontSize="12" Content="Memo" Width="50" Margin="3,0,0,0" Click="btnMemo_Click"  ToolTip="메모장 팝업을 엽니다." Visibility="{Binding POPUP_YN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource visConv}, ConverterParameter='N'}"/>
+                        <Button x:Name="btnRegEx" Style="{StaticResource btnDefault}" FontSize="12" Content="정규식" Width="50" Margin="3,0,0,0" Click="btnRegEx_Click" ToolTip="정규식 패턴 테스트 팝업을 엽니다." Visibility="{Binding POPUP_YN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource visConv}, ConverterParameter='N'}"/>
+                        <Button x:Name="btnPopup" Style="{StaticResource btnDefault}" FontSize="12" Content="Popup" Width="50" Margin="3,0,0,0" Click="btnPopup_Click" ToolTip="선택된 탭을 팝업으로 엽니다. 특정탭을 우클릭해도 해당 탭이 열립니다." Visibility="{Binding POPUP_YN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource visConv}, ConverterParameter='N'}"/>
+                        <CheckBox x:Name="chkAutoBak" Content="자동백업여부" Margin="5,0,0,0" VerticalAlignment="Center" IsChecked="{Binding USERINFO.AUTO_BACKUP_YN, Converter={StaticResource chkConv}, ConverterParameter='Y'}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Visibility="{Binding POPUP_YN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource visConv}, ConverterParameter='N'}"/>
+                        <TextBox Width="300" x:Name="txtBakPath" Style="{StaticResource WatermarkTextBox2}" Tag="백업경로" Text="{Binding USERINFO.BAK_PATH, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  Visibility="{Binding POPUP_YN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource visConv}, ConverterParameter='N'}"  IsEnabled="{Binding USERINFO.AUTO_BACKUP_YN,Converter={StaticResource EnableConv},ConverterParameter='Y'}" />
+                        <TextBox Width="80" x:Name="txtBakInterval" Style="{StaticResource WatermarkTextBox2}" Tag="백업시간(분)" Text="{Binding USERINFO.BAK_INTERVAL, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsEnabled="{Binding USERINFO.AUTO_BACKUP_YN,Converter={StaticResource EnableConv},ConverterParameter='Y'}" LostFocus="txtBakInterval_LostFocus" PreviewTextInput="TextBox_PreviewTextInput"  Visibility="{Binding POPUP_YN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource visConv}, ConverterParameter='N'}"/>
+                        <Button x:Name="btnBackUp" Style="{StaticResource btnDefault}" FontSize="12" Content="BackUp" Width="60" Margin="3,0,0,0"  Click="btnBackUp_Click" ToolTip="MyQuery와 사용자 개인설정을 백업합니다." Visibility="{Binding POPUP_YN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource visConv}, ConverterParameter='N'}"/>
+                        <Button x:Name="btnReStore" Style="{StaticResource btnDefault}" FontSize="12" Content="Restore" Width="60" Margin="3,0,0,0" Click="btnReStore_Click" ToolTip="사용자 개인설정을 불러옵니다. MyQuery는 MyQuery탭에서 불러와주세요." Visibility="{Binding POPUP_YN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource visConv}, ConverterParameter='N'}"/>
+                    </DockPanel>
+                </Border>
+            </Border>
+        </Grid>
+        <ContentControl x:Name="ctcTabPopup" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Visibility="{Binding POPUP_YN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource visConv}, ConverterParameter='Y'}"/>
+        <TabControl Name="tabMain" Grid.Row="1" AllowDrop="True" SelectionChanged="tabMain_SelectionChanged" Visibility="{Binding POPUP_YN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource visConv}, ConverterParameter='N'}"
+                    MouseRightButtonUp="tabMain_MouseRightButtonUp">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Height" Value="25"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type TabItem}">
+                                <Grid x:Name="Panel" Margin="0,1,2,0" >
+                                    <Border BorderBrush="Beige" BorderThickness="4,0,0,0" x:Name="brSel" Visibility="Collapsed"/>
+                                    <Border BorderBrush="#181C55" BorderThickness="2,0,0,0" x:Name="brSel2" Visibility="Collapsed"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock x:Name="tabHeader" Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Header}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                               FontSize="14" Foreground="Black" Margin="10,0,5,0"/>
+                                    </StackPanel>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Panel" Property="Background" Value="#181C55" />
+                                        <Setter TargetName="tabHeader" Property="Foreground" Value="White"/>
+                                        <Setter TargetName="brSel" Property="Visibility" Value="Visible"/>
+                                        <Setter TargetName="brSel2" Property="Visibility" Value="Visible"/>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Panel" Property="Background" Value="#FFF1F1F1" />
+                                        <Setter TargetName="tabHeader" Property="Foreground" Value="#181C55"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <EventSetter Event="PreviewMouseMove" Handler="TabItem_PreviewMouseMove"/>
+                    <EventSetter Event="Drop" Handler="TabItem_Drop"/>
+                </Style>
+            </TabControl.Resources>
+        </TabControl>
+    </Grid>
+</Window>

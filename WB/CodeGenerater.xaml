@@ -1,0 +1,232 @@
+﻿<uc:UCBase   xmlns:uc="clr-namespace:WB.UC"
+             x:Class="WB.CodeGenerater"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"             
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:b="clr-namespace:WB.Common"
+             xmlns:local="clr-namespace:WB"
+             mc:Ignorable="d"             
+             Loaded="UCBase_Loaded"
+             d:DesignHeight="850" d:DesignWidth="1500">
+    <uc:UCBase.DataContext>
+        <local:CodeGeneraterData/>
+    </uc:UCBase.DataContext>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="RECOURCE_DICTIONARY/ResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <b:BindingProxy x:Key="proxy" DataContext="{Binding}"/>
+            <b:VisibleConverter x:Key="VisConv"/>
+            <b:VisibleConverterV2 x:Key="VisConv2"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid x:Name="grdMain" Background="{StaticResource LightAreaBorderBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.4*"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="0.6*"/>
+        </Grid.ColumnDefinitions>
+        <Border Background="{StaticResource LightAreaBorderBrush}">
+            <DockPanel LastChildFill="False">
+                <TextBlock Text="변환 전" VerticalAlignment="Center" FontFamily="Courier New" Margin="10,5,0,0" FontSize="14" FontWeight="Bold"/>
+                <CheckBox VerticalAlignment="Center" Content="Meta정보 제외" Margin="5,0,0,0" IsChecked="{Binding USERINFO.EXCN_META ,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Command="{Binding SaveExcnMetaCommand}"/>
+                <CheckBox Content="동기화" VerticalAlignment="Center" DockPanel.Dock="Right" Margin="0,0,20,0" IsChecked="{Binding SYNC, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+            </DockPanel>
+        </Border>
+        <Border Background="{StaticResource LightAreaBorderBrush}" Grid.Column="2">
+            <DockPanel LastChildFill="False">
+                <TextBlock Text="변환 후" VerticalAlignment="Center" FontFamily="Courier New" Margin="10,5,0,0" FontSize="14" FontWeight="Bold"/>
+            </DockPanel>
+        </Border>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.25*"/>
+                <RowDefinition Height="0.25*"/>
+                <RowDefinition Height="0.25*"/>
+                <RowDefinition Height="0.25*"/>
+            </Grid.RowDefinitions>
+            <!--동기화 아님-->
+            <Border Visibility="{Binding SYNC, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource VisConv}}">
+                <TextBox Text="{Binding EQS_TEXT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" b:TextBoxBehavior.SelectAllTextOnFocus="True" Style="{StaticResource WatermarkTextBox}" Tag="EQS 매개변수 -> Golden 변수코드 생성" AcceptsReturn="True" VerticalContentAlignment="Stretch" FontFamily="Courier New" Padding="5,5,0,0" TextChanged="TextBox_TextChanged" InputMethod.PreferredImeState="On" InputMethod.PreferredImeConversionMode="Alphanumeric"/>
+            </Border>
+            <Border Grid.Column="1" Visibility="{Binding SYNC, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource VisConv}}">
+                <DockPanel>
+                    <ComboBox Width="200" DockPanel.Dock="Top" SelectedIndex="0" HorizontalAlignment="Left" Margin="5,5,0,0" ItemsSource="{Binding DTO_DRTN_LIST, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" DisplayMemberPath="DATA_TYPE_NM" SelectedValuePath="DATA_TYPE_CD" SelectedItem="{Binding DTO_DRTN_SEL, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding AutoChgTextCommand}" CommandParameter="2"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                    <TextBox Text="{Binding DTO_TEXT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" b:TextBoxBehavior.SelectAllTextOnFocus="True" Style="{StaticResource WatermarkTextBox}" Tag="쿼리 매개변수 -> DTO Property 생성" AcceptsReturn="True" VerticalContentAlignment="Stretch" FontFamily="Courier New" Padding="5,5,0,0" TextChanged="TextBox_TextChanged" InputMethod.PreferredImeState="On" InputMethod.PreferredImeConversionMode="Alphanumeric"/>
+                </DockPanel>
+            </Border>
+            <Border Grid.Row="1" Visibility="{Binding SYNC, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource VisConv}}">
+                <DockPanel>
+                    <ComboBox Width="200" DockPanel.Dock="Top" SelectedIndex="1" HorizontalAlignment="Left" Margin="5,5,0,0" ItemsSource="{Binding COMMA_LIST, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" DisplayMemberPath="DATA_TYPE_NM" SelectedValuePath="DATA_TYPE_CD" SelectedItem="{Binding COMMA_SEL, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding AutoChgTextCommand}" CommandParameter="3"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                    <TextBox Text="{Binding COMMA_TEXT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" b:TextBoxBehavior.SelectAllTextOnFocus="True" Style="{StaticResource WatermarkTextBox}" Tag="AAA BBB-> 'AAA','BBB'" AcceptsReturn="True" VerticalContentAlignment="Stretch" FontFamily="Courier New" Padding="5,5,0,0" TextChanged="TextBox_TextChanged" InputMethod.PreferredImeState="On" InputMethod.PreferredImeConversionMode="Alphanumeric"/>
+                </DockPanel>
+            </Border>
+            <Border Grid.Row="1" Grid.Column="1" Visibility="{Binding SYNC, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource VisConv}}">
+                <DockPanel>
+                    <ComboBox x:Name="cboDataType" Width="200" DockPanel.Dock="Top" SelectedIndex="0" HorizontalAlignment="Left" Margin="5,5,0,0" ItemsSource="{Binding DATATYPE_LIST, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" DisplayMemberPath="DATA_TYPE_NM" SelectedValuePath="DATA_TYPE_CD" SelectedItem="{Binding DATATYPE_SEL, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                              Text="{Binding DATA_TYPE_NM, Mode=TwoWay}" IsEditable="True" IsTextSearchEnabled="True" TextBoxBase.TextChanged="cboDataType_TextChanged" 
+                                StaysOpenOnEdit="True"
+                              >
+                        <!--<i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding AutoChgTextCommand}" CommandParameter="4"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>-->
+                    </ComboBox>
+                    <TextBox x:Name="txtView" Grid.Row="1" Text="{Binding VIEW_TEXT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" b:TextBoxBehavior.SelectAllTextOnFocus="True" Style="{StaticResource WatermarkTextBox}" Tag="쿼리 매개변수 -> View Property 생성" AcceptsReturn="True" VerticalContentAlignment="Stretch" FontFamily="Courier New" Padding="5,5,0,0" TextChanged="TextBox_TextChanged" InputMethod.PreferredImeState="On" InputMethod.PreferredImeConversionMode="Alphanumeric"/>
+                </DockPanel>
+            </Border>
+            <Border Grid.Row="2">
+                <DockPanel>
+                    <ComboBox x:Name="cboQueryDto" Width="200" DockPanel.Dock="Top" SelectedIndex="0" HorizontalAlignment="Left" Margin="5,5,0,0" ItemsSource="{Binding QUERY_DTO_DRTN_LIST, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" DisplayMemberPath="DATA_TYPE_NM" SelectedValuePath="DATA_TYPE_CD" SelectedItem="{Binding QUERY_DTO_DRTN_SEL, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectionChanged="ComboBox_SelectionChanged"/>
+                    <TextBox x:Name="txtQueryDTO" Text="{Binding QUERY_TEXT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource WatermarkTextBox}" Tag="Query Or Procedure  => DTO" AcceptsReturn="True" VerticalContentAlignment="Stretch" FontFamily="Courier New" Padding="5,5,0,0" TextChanged="txtQueryDTO_TextChanged" InputMethod.PreferredImeState="On" InputMethod.PreferredImeConversionMode="Alphanumeric">
+                        <TextBox.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem x:Name="miHDataGrid" Header="HDataGridEx" Click="miHDataGrid_Click"/>
+                                <MenuItem x:Name="miDataGrid" Header="DataGrid" Click="miDataGrid_Click"/>
+                            </ContextMenu>
+                        </TextBox.ContextMenu>
+                    </TextBox>
+                </DockPanel>
+            </Border>
+            <Border Grid.Row="2" Grid.Column="1">
+                <DockPanel>
+                    <ComboBox Width="200" DockPanel.Dock="Top" SelectedIndex="0" HorizontalAlignment="Left" Margin="5,5,0,0" ItemsSource="{Binding CONVERTTYPE_LIST, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" DisplayMemberPath="DATA_TYPE_NM" SelectedValuePath="DATA_TYPE_CD" SelectedItem="{Binding CONVERTTYPE_SEL, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding AutoChgTextCommand}" CommandParameter="5"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                    <TextBox Text="{Binding CONVERT_DATE_TEXT,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource WatermarkTextBox}" Tag="YYYY-MM-DD => TO DATE()" AcceptsReturn="True" VerticalContentAlignment="Stretch" FontFamily="Courier New" Padding="5,5,0,0" TextChanged="TextBox_TextChanged" InputMethod.PreferredImeState="On" InputMethod.PreferredImeConversionMode="Alphanumeric"/>
+                </DockPanel>
+            </Border>
+            <Border Grid.Row="3" Visibility="{Binding SYNC, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource VisConv}}">
+                <DockPanel>
+                    <TextBox x:Name="txtErrorParam" Text="{Binding ERROR_PARAM, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource WatermarkTextBox}" Tag="Parameter => RaiseApplication" AcceptsReturn="True" VerticalContentAlignment="Stretch" FontFamily="Courier New" Padding="5,5,0,0" TextChanged="txtQueryDTO_TextChanged" InputMethod.PreferredImeState="On" InputMethod.PreferredImeConversionMode="Alphanumeric">
+                    </TextBox>
+                </DockPanel>
+            </Border>
+            
+            <!--동기화-->
+            <Border Visibility="{Binding SYNC, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource VisConv2}}">
+                <TextBox Text="{Binding SYNC_TEXT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" b:TextBoxBehavior.SelectAllTextOnFocus="True" Style="{StaticResource WatermarkTextBox}" Tag="EQS 매개변수 -> Golden 변수코드 생성" AcceptsReturn="True" VerticalContentAlignment="Stretch" FontFamily="Courier New" Padding="5,5,0,0" TextChanged="TextBox_TextChanged" InputMethod.PreferredImeState="On" InputMethod.PreferredImeConversionMode="Alphanumeric"/>
+            </Border>
+            <Border Grid.Column="1" Visibility="{Binding SYNC, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource VisConv2}}">
+                <DockPanel>
+                    <ComboBox Width="200" DockPanel.Dock="Top" SelectedIndex="0" HorizontalAlignment="Left" Margin="5,5,0,0" ItemsSource="{Binding DTO_DRTN_LIST, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" DisplayMemberPath="DATA_TYPE_NM" SelectedValuePath="DATA_TYPE_CD" SelectedItem="{Binding DTO_DRTN_SEL, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding AutoChgTextCommand}" CommandParameter="2"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                    <TextBox Text="{Binding SYNC_TEXT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" b:TextBoxBehavior.SelectAllTextOnFocus="True" Style="{StaticResource WatermarkTextBox}" Tag="쿼리 매개변수 -> DTO Property 생성" AcceptsReturn="True" VerticalContentAlignment="Stretch" FontFamily="Courier New" Padding="5,5,0,0" TextChanged="TextBox_TextChanged" InputMethod.PreferredImeState="On" InputMethod.PreferredImeConversionMode="Alphanumeric"/>
+                </DockPanel>
+            </Border>
+            <Border Grid.Row="1" Visibility="{Binding SYNC, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource VisConv2}}">
+                <DockPanel>
+                    <ComboBox Width="200" DockPanel.Dock="Top" SelectedIndex="1" HorizontalAlignment="Left" Margin="5,5,0,0" ItemsSource="{Binding COMMA_LIST, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" DisplayMemberPath="DATA_TYPE_NM" SelectedValuePath="DATA_TYPE_CD" SelectedItem="{Binding COMMA_SEL, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding AutoChgTextCommand}" CommandParameter="3"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                    <TextBox Text="{Binding SYNC_TEXT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" b:TextBoxBehavior.SelectAllTextOnFocus="True" Style="{StaticResource WatermarkTextBox}" Tag="AAA BBB-> 'AAA','BBB'" AcceptsReturn="True" VerticalContentAlignment="Stretch" FontFamily="Courier New" Padding="5,5,0,0" TextChanged="TextBox_TextChanged" InputMethod.PreferredImeState="On" InputMethod.PreferredImeConversionMode="Alphanumeric"/>
+                </DockPanel>
+            </Border>
+            <Border Grid.Row="1" Grid.Column="1" Visibility="{Binding SYNC, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource VisConv2}}">
+                <DockPanel>
+                    <ComboBox x:Name="cboDataType2" Width="200" DockPanel.Dock="Top" SelectedIndex="0" HorizontalAlignment="Left" Margin="5,5,0,0" ItemsSource="{Binding DATATYPE_LIST, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" DisplayMemberPath="DATA_TYPE_NM" SelectedValuePath="DATA_TYPE_CD" SelectedItem="{Binding DATATYPE_SEL, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                              Text="{Binding DATA_TYPE_NM, Mode=TwoWay}" IsEditable="True" IsTextSearchEnabled="True" TextBoxBase.TextChanged="cboDataType_TextChanged" 
+                                StaysOpenOnEdit="True"
+                              >
+                        <!--<i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding AutoChgTextCommand}" CommandParameter="4"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>-->
+                    </ComboBox>
+                    <TextBox x:Name="txtView2" Grid.Row="1" Text="{Binding SYNC_TEXT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" b:TextBoxBehavior.SelectAllTextOnFocus="True" Style="{StaticResource WatermarkTextBox}" Tag="쿼리 매개변수 -> View Property 생성" AcceptsReturn="True" VerticalContentAlignment="Stretch" FontFamily="Courier New" Padding="5,5,0,0" TextChanged="TextBox_TextChanged" InputMethod.PreferredImeState="On" InputMethod.PreferredImeConversionMode="Alphanumeric"/>
+                </DockPanel>
+            </Border>
+            <Border Grid.Row="3" Visibility="{Binding SYNC, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource VisConv2}}">
+                <DockPanel>
+                    <TextBox x:Name="txtErrorParam2" Text="{Binding SYNC_TEXT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource WatermarkTextBox}" Tag="Parameter => RaiseApplication" AcceptsReturn="True" VerticalContentAlignment="Stretch" FontFamily="Courier New" Padding="5,5,0,0" TextChanged="txtQueryDTO_TextChanged" InputMethod.PreferredImeState="On" InputMethod.PreferredImeConversionMode="Alphanumeric">
+                    </TextBox>
+                </DockPanel>
+            </Border>
+            <!--동기화끝-->
+        </Grid>
+        <GridSplitter Grid.Column="1" Grid.RowSpan="2" Style="{StaticResource VerGridSplitter}" PreviewMouseDoubleClick="GridSplitter_MouseDoubleClick" Margin="2,0,2,0"/>
+        <Grid Grid.Row="1" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.25*"/>
+                <RowDefinition Height="0.25*"/>
+                <RowDefinition Height="0.25*"/>
+                <RowDefinition Height="0.25*"/>
+            </Grid.RowDefinitions>
+            <Border>
+                <TextBox Text="{Binding EQS_TEXT_R, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" b:TextBoxBehavior.SelectAllTextOnFocus="True" Style="{StaticResource WatermarkTextBox}" Tag="EQS 매개변수 -> Golden 변수코드 결과" AcceptsReturn="True" VerticalContentAlignment="Stretch" FontFamily="Courier New" Padding="5,5,0,0"/>
+            </Border>
+            <Border Grid.Column="1">
+                <TextBox Text="{Binding DTO_TEXT_R, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" b:TextBoxBehavior.SelectAllTextOnFocus="True" Style="{StaticResource WatermarkTextBox}" Tag="쿼리 매개변수 -> DTO Property 결과" AcceptsReturn="True" VerticalContentAlignment="Stretch" FontFamily="Courier New" Padding="5,5,0,0" />
+            </Border>
+            <Border Grid.Row="1">
+                <TextBox Text="{Binding COMMA_TEXT_R, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" b:TextBoxBehavior.SelectAllTextOnFocus="True" Style="{StaticResource WatermarkTextBox}" Tag="AAA BBB-> 'AAA','BBB' 결과" AcceptsReturn="True" VerticalContentAlignment="Stretch" FontFamily="Courier New" Padding="5,5,0,0"/>
+            </Border>
+            <Border Grid.Row="1" Grid.Column="1">
+                <TextBox Text="{Binding VIEW_TEXT_R, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" b:TextBoxBehavior.SelectAllTextOnFocus="True" Style="{StaticResource WatermarkTextBox}" Tag="쿼리 매개변수 -> View Property 결과" AcceptsReturn="True" VerticalContentAlignment="Stretch" FontFamily="Courier New" Padding="5,5,0,0"/>
+            </Border>
+            <Border Grid.Row="2">
+                <TextBox Text="{Binding QUERY_DTO_TEXT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource WatermarkTextBox}" Tag="QUERY => DTO" AcceptsReturn="True" VerticalContentAlignment="Stretch" FontFamily="Courier New" Padding="5,5,0,0" GotFocus="txtCode_GotFocus"/>
+            </Border>
+            <Grid Grid.Row="2" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Border>
+                    <TextBox Text="{Binding CONVERT_DATE_TEXT_R, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource WatermarkTextBox}" Tag="YYYY-MM-DD => TO DATE()" AcceptsReturn="True" VerticalContentAlignment="Stretch" FontFamily="Courier New" Padding="5,5,0,0" GotFocus="txtCode_GotFocus"/>
+                </Border>
+                <Border Grid.Row="1">
+                    <TextBox Text="{Binding CONVERT_DATE_TEXT_R2, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource WatermarkTextBox}" Tag="YYYY-MM-DD => TO DATE()" AcceptsReturn="True" VerticalContentAlignment="Stretch" FontFamily="Courier New" Padding="5,5,0,0" GotFocus="txtCode_GotFocus"/>
+                </Border>
+            </Grid>
+            <Border Grid.Row="3">
+                <DockPanel>
+                    <TextBox x:Name="txtErrorParamRslt" Text="{Binding ERROR_PARAM_RSLT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource WatermarkTextBox}" Tag="Parameter => RaiseApplication" AcceptsReturn="True" VerticalContentAlignment="Stretch" FontFamily="Courier New" Padding="5,5,0,0" TextChanged="txtQueryDTO_TextChanged" InputMethod.PreferredImeState="On" InputMethod.PreferredImeConversionMode="Alphanumeric">
+                    </TextBox>
+                </DockPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</uc:UCBase>

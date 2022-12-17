@@ -1,0 +1,125 @@
+﻿<uc:UCBase xmlns:uc="clr-namespace:WB.UC" 
+             x:Class="WB.Setting"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WB"
+             mc:Ignorable="d" 
+             Loaded="UCBase_Loaded"
+             d:DesignHeight="850" d:DesignWidth="1300">
+    <!--<UserControl.DataContext>
+        <local:Setting/>
+    </UserControl.DataContext>-->
+    <UserControl.Resources>
+        <ResourceDictionary Source="RECOURCE_DICTIONARY/ResourceDictionary.xaml">
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" Background="{StaticResource LightAreaBorderBrush}">
+            <TextBlock Text="환경설정" VerticalAlignment="Center" Margin="5,0,0,0" FontWeight="ExtraBlack" FontSize="14" />
+        </StackPanel>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border BorderThickness="1,1,0,0" BorderBrush="Gray">
+                <DockPanel Grid.ColumnSpan="2" Background="WhiteSmoke" LastChildFill="False">
+                    <TextBlock Text="기본설정" VerticalAlignment="Center" Margin="5,0,0,0" FontWeight="ExtraBlack" FontSize="14" DockPanel.Dock="Left"/>
+                    <TextBlock Text="* Meta 접속정보가 다를경우 'Meta정보제외' 체크박스를 체크해야 에러가 나지 않습니다." VerticalAlignment="Center" Margin="5,0,0,0" FontWeight="ExtraBlack" FontSize="11" DockPanel.Dock="Left" Foreground="Red"/>
+                    <Button Content="저장" Style="{StaticResource btnSave}" FontSize="14" DockPanel.Dock="Right" Width="50" VerticalAlignment="Center" Margin="0,0,5,0" Click="BtnSave0_Click">
+                    </Button>
+                </DockPanel>
+            </Border>
+            <DataGrid x:Name="dgdBasicSetting" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalGridLinesBrush="{StaticResource SearchAreaAliceBorderBrush}" VerticalGridLinesBrush="{StaticResource SearchAreaAliceBorderBrush}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="CODE" Binding="{Binding CODE}" Visibility="Collapsed"/>
+                    <DataGridTextColumn Header="Property" Binding="{Binding PROPERTY}"/>
+                    <DataGridTextColumn Header="Value" Binding="{Binding VALUE}"/>
+                    <DataGridTextColumn Header="Remark" Binding="{Binding REMARK}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Border BorderThickness="0,1,1,0" BorderBrush="Gray">
+                    <DockPanel Grid.ColumnSpan="2" Background="WhiteSmoke" LastChildFill="False">
+                        <TextBlock Text="DB1"  VerticalAlignment="Center" Margin="5,0,0,0" FontWeight="ExtraBlack" FontSize="14" DockPanel.Dock="Left"/>
+                        <Button Content="저장" DockPanel.Dock="Right" Width="50"  Style="{StaticResource btnSave}" FontSize="14"  VerticalAlignment="Center" Margin="0,0,5,0" Click="BtnSaveTotal_Click"/>
+
+                        <Button x:Name="btnAdd1" Content="+" Width="20" Margin="0,2,5,2" DockPanel.Dock="Right" Style="{StaticResource btnDefault}" VerticalAlignment="Center"    Click="BtnAdd_Click"/>
+                    </DockPanel>
+                </Border>
+                <DataGrid x:Name="dgdDBUser1" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="False" HorizontalGridLinesBrush="{StaticResource SearchAreaAliceBorderBrush}" VerticalGridLinesBrush="{StaticResource SearchAreaAliceBorderBrush}">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn>
+                            <DataGridTemplateColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <Button x:Name="btnAddHeader1" Content="+" Width="20" Margin="0,2,5,2" DockPanel.Dock="Right" Style="{StaticResource btnDefault}" VerticalAlignment="Center"    Click="BtnAdd1_Click"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.HeaderTemplate>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="-" Width="20" Margin="0,0,5,0" DockPanel.Dock="Right" Style="{StaticResource btnDefault}" VerticalAlignment="Center" Click="BtnDelete1_Click"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Property" Binding="{Binding USER_NAME}" Width="100"/>
+                        <DataGridTextColumn Header="Value" Width="*" Binding="{Binding CONNECT_STRING}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Border BorderThickness="1,0,1,0" BorderBrush="Gray">
+                        <DockPanel Grid.ColumnSpan="2" Background="WhiteSmoke" LastChildFill="False">
+                            <TextBlock Text="DB2" VerticalAlignment="Center" Margin="5,0,0,0" FontWeight="ExtraBlack" FontSize="14" DockPanel.Dock="Left"/>
+                            <!--<Button Content="저장" DockPanel.Dock="Right" Width="50"  Style="{StaticResource CommonButtonSaveStyle}"  VerticalAlignment="Center" Margin="0,0,5,0" Click="BtnSave2_Click"/>
+                            <Button Content="-" Width="20" Margin="0,0,5,0" DockPanel.Dock="Right" Background="{StaticResource SearchAreaBackground}" VerticalAlignment="Center" Click="BtnDelete2_Click"/>
+                            <Button x:Name="btnAdd2" Content="+" Width="20" Margin="0,0,5,0" DockPanel.Dock="Right" Background="{StaticResource SearchAreaBackground}" VerticalAlignment="Center" Click="BtnAdd2_Click"/>-->
+                        </DockPanel>
+                    </Border>
+                    <DataGrid x:Name="dgdDBUser2"  Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="False" HorizontalGridLinesBrush="{StaticResource SearchAreaAliceBorderBrush}" VerticalGridLinesBrush="{StaticResource SearchAreaAliceBorderBrush}">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <Button x:Name="btnAddHeader2" Content="+" Width="20" Margin="0,2,5,2" DockPanel.Dock="Right" Style="{StaticResource btnDefault}" VerticalAlignment="Center"    Click="BtnAdd2_Click"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.HeaderTemplate>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="-" Width="20" Margin="0,0,5,0" DockPanel.Dock="Right" Style="{StaticResource btnDefault}" VerticalAlignment="Center" Click="BtnDelete2_Click"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Property" Binding="{Binding USER_NAME}" Width="100"/>
+                            <DataGridTextColumn Header="Value" Width="*" Binding="{Binding CONNECT_STRING}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</uc:UCBase>

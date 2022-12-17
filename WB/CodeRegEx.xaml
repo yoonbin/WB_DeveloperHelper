@@ -1,0 +1,59 @@
+﻿<Window x:Class="WB.CodeRegEx"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:b="clr-namespace:WB.Common"
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        xmlns:local="clr-namespace:WB"        
+        Loaded="Window_Loaded"
+        WindowState="Maximized"
+        mc:Ignorable="d"
+        Title="RegEx" Height="850" Width="1200">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="RECOURCE_DICTIONARY/ResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid x:Name="grdMain">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Row="0" BorderBrush="Black" BorderThickness="1,1,0,1">
+            <DockPanel LastChildFill="False">
+                <TextBlock Text="패턴" Style="{StaticResource DefaultTextBlock}"/>
+                <TextBox x:Name="searchText" Style="{StaticResource DefaultTextBoxV2}" Width="500" Height="20" VerticalAlignment="Center" KeyDown="searchText_KeyDown" TextChanged="searchText_TextChanged" AcceptsReturn="False" InputMethod.PreferredImeState="On" InputMethod.PreferredImeConversionMode="Alphanumeric"/>
+                <TextBox x:Name="txtFontSize" PreviewTextInput="txtFontSize_PreviewTextInput" Text="10" VerticalAlignment="Center" Style="{StaticResource DefaultTextBoxV2}" Width="30" TextAlignment="Center" TextChanged="txtFontSize_TextChanged"/>
+                <Button Style="{StaticResource SearchButton}" Content="조회" Width="60" Click="Button_Click"/>
+                <CheckBox x:Name="chkI" Content="i" VerticalAlignment="Center" Margin="5,0,0,0" VerticalContentAlignment="Center" ToolTip="대/소문자를 구분하지 않는 일치를 사용합니다." IsChecked="True" Checked="CheckBox_Checked_1" Unchecked="CheckBox_Unchecked_1"/>
+                <CheckBox x:Name="chkM" Content="m" VerticalAlignment="Center" Margin="5,0,0,0" VerticalContentAlignment="Center" ToolTip="여러 줄 모드를 사용합니다. 여기서 ^ 및 $는 각 줄의 시작 부분 및 끝 부분과 일치합니다(입력 문자열의 시작 부분 및 끝 부분 대신). " Checked="CheckBox_Checked_1" Unchecked="CheckBox_Unchecked_1" IsChecked="False"/>
+                <CheckBox x:Name="chkS" Content="s" VerticalAlignment="Center" Margin="5,0,0,0" VerticalContentAlignment="Center" ToolTip="한 줄 모드를 사용합니다. 여기서 마침표(.)는 모든 문자와 일치합니다(\n을 제외한 모든 문자 대신)." Checked="CheckBox_Checked_1" Unchecked="CheckBox_Unchecked_1" IsChecked="False"/>
+                <TextBlock Text="[ F1을 누르면 정규식 도움말을 볼 수 있습니다. ]" Style="{StaticResource DefaultTextBlock}" DockPanel.Dock="Right" Margin="0,0,30,0"/>
+                <!--<CheckBox Content="대소문자 구별 " VerticalAlignment="Center" Margin="5,0,0,0" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+                <TextBlock Text="//찾은건수 : " Style="{StaticResource DefaultTextBlock}"/>
+                <TextBlock x:Name="txtSearchCnt" Style="{StaticResource DefaultTextBlock}"/>
+                <TextBlock Text="    //F3 : 조회 된 단어를 찾아갑니다. " Style="{StaticResource DefaultTextBlock}"/>-->
+            </DockPanel>
+        </Border>
+        <Border Grid.Row="1">
+            <WindowsFormsHost>
+                <wf:RichTextBox x:Name="txtCode" Font="Courier New" AcceptsTab="False" TextChanged="txtCode_TextChanged"/>
+            </WindowsFormsHost>
+        </Border>
+        <Grid Grid.RowSpan="2" Grid.Column="1">
+            <DataGrid x:Name="dgrdHelp" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalGridLinesBrush="{StaticResource SearchAreaAliceBorderBrush}" VerticalGridLinesBrush="{StaticResource SearchAreaAliceBorderBrush}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="기호" Width="100" Binding="{Binding SYM}"/>
+                    <DataGridTextColumn Header="의미" Width="*" Binding="{Binding MNNG}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Window>

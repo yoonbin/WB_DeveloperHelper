@@ -1,0 +1,1 @@
+﻿result = double.Parse(Regex.Replace(item.CR_RSULT, @"[^0-9|.]", ""));

@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap
+    namespace="Ibatis"
+    xmlns="http://ibatis.apache.org/mapping"
+    xmlns:xls="http://www.w3.org/2001/XMLSchema-instance">
+	<statements>
+		<select id="MetaDL.GetMetaData" resultClass="WB.Meta_INOUT" parameterclass="WB.Meta_INOUT">
+			<![CDATA[ 
+
+SELECT C.CD_NM GBN
+      ,B.CD_NM GBN_DTL
+      ,DIC_LOG_NM
+      ,DIC_PHY_NM
+      ,A.DIC_PHY_FLL_NM
+      ,DIC_DESC
+      ,A.DATA_TYPE
+      ,A.STANDARD_YN
+      ,(SELECT B.CD_NM GBN_DTL
+          FROM STD_DOM X
+              ,DA_CODE B
+              ,MS_CODE C
+         WHERE 1=1
+           AND X.DOM_ID = A.DOM_ID
+           AND X.DOM_TYPE_CD = B.CD_ID
+           AND B.UP_CD_ID = C.CD_ID
+           AND C.UP_CD_ID = 'ROOT'
+           AND B.UP_CD_ID = '6022'
+           AND SYSDATE BETWEEN TO_DATE(AVAL_ST_DT, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(AVAL_END_DT,'YYYY-MM-DD HH24:MI:SS')) DOM_GRP_NM
+    FROM STD_DIC A
+        ,DA_CODE B
+        ,MS_CODE C
+WHERE 1=1
+AND DIC_PHY_NM = #TEXT#
+AND A.DIC_GBN_CD = B.CD_ID
+AND B.UP_CD_ID = C.CD_ID
+AND C.UP_CD_ID = 'ROOT'
+AND B.UP_CD_ID = '6019'
+AND SYSDATE BETWEEN TO_DATE(AVAL_ST_DT, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(AVAL_END_DT,'YYYY-MM-DD HH24:MI:SS')
+UNION ALL
+SELECT C.CD_NM GBN
+      ,B.CD_NM GBN_DTL
+      ,DIC_LOG_NM
+      ,DIC_PHY_NM
+      ,A.DIC_PHY_FLL_NM
+      ,DIC_DESC
+      ,A.DATA_TYPE
+      ,A.STANDARD_YN
+      ,(SELECT B.CD_NM GBN_DTL
+          FROM STD_DOM X
+              ,DA_CODE B
+              ,MS_CODE C
+         WHERE 1=1
+           AND X.DOM_ID = A.DOM_ID
+           AND X.DOM_TYPE_CD = B.CD_ID
+           AND B.UP_CD_ID = C.CD_ID
+           AND C.UP_CD_ID = 'ROOT'
+           AND B.UP_CD_ID = '6022'
+           AND SYSDATE BETWEEN TO_DATE(AVAL_ST_DT, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(AVAL_END_DT,'YYYY-MM-DD HH24:MI:SS')) DOM_GRP_NM
+    FROM STD_DIC A
+        ,DA_CODE B
+        ,MS_CODE C
+WHERE 1=1
+AND DIC_LOG_NM = #TEXT#
+AND A.DIC_GBN_CD = B.CD_ID
+AND B.UP_CD_ID = C.CD_ID
+AND C.UP_CD_ID = 'ROOT'
+AND B.UP_CD_ID = '6019'
+AND SYSDATE BETWEEN TO_DATE(AVAL_ST_DT, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(AVAL_END_DT,'YYYY-MM-DD HH24:MI:SS')
+
+            
+            
+      ]]>
+		</select>
+	</statements>
+
+</sqlMap>

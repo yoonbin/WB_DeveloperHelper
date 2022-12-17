@@ -1,0 +1,5 @@
+﻿SELECT A.*
+  FROM BSFSMPTC A
+ WHERE 1=1
+   AND ROWNUM < 100
+;

@@ -1,0 +1,5 @@
+C:\Users\ohwonbin\source\repos\WB\WB.DTO\bin\Debug\WB.DTO.dll
+C:\Users\ohwonbin\source\repos\WB\WB.DTO\bin\Debug\WB.DTO.pdb
+C:\Users\ohwonbin\source\repos\WB\WB.DTO\obj\Debug\WB.DTO.csproj.CoreCompileInputs.cache
+C:\Users\ohwonbin\source\repos\WB\WB.DTO\obj\Debug\WB.DTO.dll
+C:\Users\ohwonbin\source\repos\WB\WB.DTO\obj\Debug\WB.DTO.pdb

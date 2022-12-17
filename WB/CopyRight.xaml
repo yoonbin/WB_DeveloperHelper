@@ -1,0 +1,18 @@
+﻿<Window x:Class="WB.CopyRight"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WB"
+        mc:Ignorable="d"
+        Title="Copyright" Height="90" Width="300">
+    <Grid>
+        <Border BorderBrush="Blue" BorderThickness="1">
+            <StackPanel>
+                <TextBlock Text="Copyright 2022. OH WON BIN All rights reserved." VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="Mail : dnjsqlsdh@gmail.com  , Tel : 010-7551-0864" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                <TextBlock Text="Reference : DH.exe (SONG CHANG SU)" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

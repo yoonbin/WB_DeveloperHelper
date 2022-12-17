@@ -1,0 +1,17 @@
+C:\Users\ohwonbin\source\repos\WB\WB.DAC\bin\Debug\WB.DAC.dll
+C:\Users\ohwonbin\source\repos\WB\WB.DAC\bin\Debug\WB.DAC.pdb
+C:\Users\ohwonbin\source\repos\WB\WB.DAC\bin\Debug\IBatisNet.Common.dll
+C:\Users\ohwonbin\source\repos\WB\WB.DAC\bin\Debug\IBatisNet.Common.Logging.Log4Net.dll
+C:\Users\ohwonbin\source\repos\WB\WB.DAC\bin\Debug\IBatisNet.DataMapper.dll
+C:\Users\ohwonbin\source\repos\WB\WB.DAC\bin\Debug\WB.DTO.dll
+C:\Users\ohwonbin\source\repos\WB\WB.DAC\bin\Debug\Castle.DynamicProxy.dll
+C:\Users\ohwonbin\source\repos\WB\WB.DAC\bin\Debug\log4net.dll
+C:\Users\ohwonbin\source\repos\WB\WB.DAC\bin\Debug\IBatisNet.Common.xml
+C:\Users\ohwonbin\source\repos\WB\WB.DAC\bin\Debug\IBatisNet.Common.Logging.Log4Net.xml
+C:\Users\ohwonbin\source\repos\WB\WB.DAC\bin\Debug\IBatisNet.DataMapper.xml
+C:\Users\ohwonbin\source\repos\WB\WB.DAC\bin\Debug\WB.DTO.pdb
+C:\Users\ohwonbin\source\repos\WB\WB.DAC\bin\Debug\log4net.xml
+C:\Users\ohwonbin\source\repos\WB\WB.DAC\obj\Debug\WB.DAC.csproj.CoreCompileInputs.cache
+C:\Users\ohwonbin\source\repos\WB\WB.DAC\obj\Debug\WB.DAC.csproj.CopyComplete
+C:\Users\ohwonbin\source\repos\WB\WB.DAC\obj\Debug\WB.DAC.dll
+C:\Users\ohwonbin\source\repos\WB\WB.DAC\obj\Debug\WB.DAC.pdb

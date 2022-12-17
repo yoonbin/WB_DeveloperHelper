@@ -1,0 +1,1009 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserInfo_INOUT xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <BASE_STATE />
+  <EXCN_META>true</EXCN_META>
+  <TAB_INFO_LIST>
+    <TabInfo_INOUT>
+      <BASE_STATE />
+      <TAB_NAME>tiTableInfo</TAB_NAME>
+      <SEQ>0</SEQ>
+    </TabInfo_INOUT>
+    <TabInfo_INOUT>
+      <BASE_STATE />
+      <TAB_NAME>tiCodeGenerater</TAB_NAME>
+      <SEQ>1</SEQ>
+    </TabInfo_INOUT>
+    <TabInfo_INOUT>
+      <BASE_STATE />
+      <TAB_NAME>tiSourceGenerater</TAB_NAME>
+      <SEQ>2</SEQ>
+    </TabInfo_INOUT>
+    <TabInfo_INOUT>
+      <BASE_STATE />
+      <TAB_NAME>tiCommonCode</TAB_NAME>
+      <SEQ>3</SEQ>
+    </TabInfo_INOUT>
+    <TabInfo_INOUT>
+      <BASE_STATE />
+      <TAB_NAME>tiEqsDbSource</TAB_NAME>
+      <SEQ>4</SEQ>
+    </TabInfo_INOUT>
+    <TabInfo_INOUT>
+      <BASE_STATE />
+      <TAB_NAME>tiEamInfo</TAB_NAME>
+      <SEQ>5</SEQ>
+    </TabInfo_INOUT>
+    <TabInfo_INOUT>
+      <BASE_STATE />
+      <TAB_NAME>tiDBSourceFinder</TAB_NAME>
+      <SEQ>6</SEQ>
+    </TabInfo_INOUT>
+    <TabInfo_INOUT>
+      <BASE_STATE />
+      <TAB_NAME>tiUserInfo</TAB_NAME>
+      <SEQ>7</SEQ>
+    </TabInfo_INOUT>
+    <TabInfo_INOUT>
+      <BASE_STATE />
+      <TAB_NAME>tiFavQuery</TAB_NAME>
+      <SEQ>8</SEQ>
+    </TabInfo_INOUT>
+    <TabInfo_INOUT>
+      <BASE_STATE />
+      <TAB_NAME>tiCalMemo</TAB_NAME>
+      <SEQ>9</SEQ>
+    </TabInfo_INOUT>
+    <TabInfo_INOUT>
+      <BASE_STATE />
+      <TAB_NAME>tiFavMemo</TAB_NAME>
+      <SEQ>10</SEQ>
+    </TabInfo_INOUT>
+    <TabInfo_INOUT>
+      <BASE_STATE />
+      <TAB_NAME>tiMeta</TAB_NAME>
+      <SEQ>11</SEQ>
+    </TabInfo_INOUT>
+    <TabInfo_INOUT>
+      <BASE_STATE />
+      <TAB_NAME>tiCodeReOrder</TAB_NAME>
+      <SEQ>12</SEQ>
+    </TabInfo_INOUT>
+    <TabInfo_INOUT>
+      <BASE_STATE />
+      <TAB_NAME>tiSetting</TAB_NAME>
+      <SEQ>13</SEQ>
+    </TabInfo_INOUT>
+  </TAB_INFO_LIST>
+  <MY_CAL_LIST>
+    <SelectCalMemo_INOUT>
+      <BASE_STATE />
+      <MEMO_DATE>2022-11-28</MEMO_DATE>
+      <MEMO_TEXT>학동 영상의학과 원내판독 마스터 세팅가능하도록 변경해야함.
+
+1. 코드등록 마스터 (HEXM)</MEMO_TEXT>
+    </SelectCalMemo_INOUT>
+    <SelectCalMemo_INOUT>
+      <BASE_STATE />
+      <MEMO_DATE>2022-11-29</MEMO_DATE>
+      <MEMO_TEXT>검사실별 오더조회
+예약조회
+스케줄관리
+학동 원내판독마스터 (희망의사함수,배치,PACS트리거)
+미판독조회 판독섹션 추가
+
+영상 예약조회 
+
+
+</MEMO_TEXT>
+    </SelectCalMemo_INOUT>
+    <SelectCalMemo_INOUT>
+      <BASE_STATE />
+      <MEMO_DATE>2022-12-01</MEMO_DATE>
+      <MEMO_TEXT>PSS_OA_MS_631
+PSS_OA_MS_633
+PSS_OA_MS_638
+PSS_OA_MS_641
+PSS_OA_MS_642
+PSS_OA_MS_643
+PSS_OA_MS_644
+</MEMO_TEXT>
+    </SelectCalMemo_INOUT>
+    <SelectCalMemo_INOUT>
+      <BASE_STATE />
+      <MEMO_DATE>2022-11-30</MEMO_DATE>
+      <MEMO_TEXT>수요일</MEMO_TEXT>
+    </SelectCalMemo_INOUT>
+    <SelectCalMemo_INOUT>
+      <BASE_STATE />
+      <MEMO_DATE>2022-12-05</MEMO_DATE>
+      <MEMO_TEXT>select exm_PRGR_STS_CD,acpt_dtm,rtm_fmt_dtm,RTM_CLSN_DT,rsv_dtm,exm_hope_dt,pact_Tp_Cd,a.*
+    from mooorexm a
+    where hsp_tp_CD = '03'
+    and pt_NO ='20466587'
+    and ord_DT = '2022-12-06'
+    and ord_CTG_CD = 'BR1'
+;
+select RTM_FMT_DTM,a.*
+    from msermamd a
+    where hsp_TP_CD='03'
+    and ord_ID=  '192571874'
+;
+select *
+    from msermaad
+   where hsp_TP_CD='03'
+    and ord_ID=  '192571874'
+;
+select rsv_dtm,a.*
+    from mooorexh  a
+    where hsp_TP_CD='03'
+    and ord_ID ='192571874'
+
+
+-ORD_DT - 11.25실제처방 -&gt; 12.06 미래처방
+
+예약을 11월29일로 변경함.
+
+재료 11.29 발행
+
+11.30 -&gt; 처방일이 미래라서 집계 안됨.
+
+청구 문제 됨?
+
+-&gt; ORD_DT가 미래면 접수를 못하도록 ?
+</MEMO_TEXT>
+    </SelectCalMemo_INOUT>
+    <SelectCalMemo_INOUT>
+      <BASE_STATE />
+      <MEMO_DATE>2022-12-16</MEMO_DATE>
+      <MEMO_TEXT>송년회</MEMO_TEXT>
+    </SelectCalMemo_INOUT>
+    <SelectCalMemo_INOUT>
+      <BASE_STATE />
+      <MEMO_DATE>2022-12-13</MEMO_DATE>
+      <MEMO_TEXT>재활통계 연보 배포</MEMO_TEXT>
+    </SelectCalMemo_INOUT>
+    <SelectCalMemo_INOUT>
+      <BASE_STATE />
+      <MEMO_DATE>2022-12-30</MEMO_DATE>
+      <MEMO_TEXT>철수</MEMO_TEXT>
+    </SelectCalMemo_INOUT>
+    <SelectCalMemo_INOUT>
+      <BASE_STATE />
+      <MEMO_DATE>2022-12-28</MEMO_DATE>
+      <MEMO_TEXT>회식
+</MEMO_TEXT>
+    </SelectCalMemo_INOUT>
+    <SelectCalMemo_INOUT>
+      <BASE_STATE />
+      <MEMO_DATE>2022-12-20</MEMO_DATE>
+      <MEMO_TEXT>PASC실 점심약속
+</MEMO_TEXT>
+    </SelectCalMemo_INOUT>
+    <SelectCalMemo_INOUT>
+      <BASE_STATE />
+      <MEMO_DATE>2022-12-19</MEMO_DATE>
+      <MEMO_TEXT>병윤책임, 지민책임 점심약속
+</MEMO_TEXT>
+    </SelectCalMemo_INOUT>
+    <SelectCalMemo_INOUT>
+      <BASE_STATE />
+      <MEMO_DATE>2022-12-21</MEMO_DATE>
+      <MEMO_TEXT>저녁 전대병원 분식집 약속</MEMO_TEXT>
+    </SelectCalMemo_INOUT>
+  </MY_CAL_LIST>
+  <FAVEAMINFO_LIST>
+    <EAMMenuInfo_INOUT>
+      <BASE_STATE />
+      <ABBR_NM>검사결과</ABBR_NM>
+      <BUSINESS_TYP>RM</BUSINESS_TYP>
+      <MENU_CD>RM_POPUP_ExaminationResultAskMain</MENU_CD>
+      <BIZ_MENU_ID>203279</BIZ_MENU_ID>
+      <MENU_ID>RM_POPUP_ExaminationResultAskMain</MENU_ID>
+      <MENU_NM>검사결과조회</MENU_NM>
+      <FOLDER_YN>N</FOLDER_YN>
+      <UP_MENU_CD>RM_POPUP</UP_MENU_CD>
+      <USE_YN>Y</USE_YN>
+      <SORT_SEQ>35</SORT_SEQ>
+      <ASSEMBLY_NM>HIS.MS.EC.PS.EV.UI</ASSEMBLY_NM>
+      <APP_URL>/ExaminationResultAskMain.xaml</APP_URL>
+      <DUP_YN>N</DUP_YN>
+      <MENU_OPEN_TYPE>POPUP</MENU_OPEN_TYPE>
+      <DISP_YN>N</DISP_YN>
+      <AUTH_CHECK_YN>N</AUTH_CHECK_YN>
+      <FILE_LTH>0</FILE_LTH>
+    </EAMMenuInfo_INOUT>
+    <EAMMenuInfo_INOUT>
+      <BASE_STATE />
+      <ABBR_NM>과내</ABBR_NM>
+      <BUSINESS_TYP>SE</BUSINESS_TYP>
+      <MENU_CD>SE_INFO_ORD_SelectExaminationRoomPrescribe</MENU_CD>
+      <BIZ_MENU_ID>10005578</BIZ_MENU_ID>
+      <MENU_ID>SE_INFO_ORD_SelectExaminationRoomPrescribe</MENU_ID>
+      <MENU_NM>검사실별오더조회</MENU_NM>
+      <FOLDER_YN>N</FOLDER_YN>
+      <UP_MENU_CD>SE_EXM_ACP</UP_MENU_CD>
+      <USE_YN>Y</USE_YN>
+      <SORT_SEQ>1</SORT_SEQ>
+      <ASSEMBLY_NM>HIS.MS.IV.SD.RC.UI</ASSEMBLY_NM>
+      <APP_URL>/SelectExaminationPrescribe.xaml?EAMPARAM=SE</APP_URL>
+      <ICON_URI>HISFILE01/CM/IMAGE/MenuICON/MS/SE_INFO_ORDRSV_SelectExaminationRoomPrescribe.png</ICON_URI>
+      <DUP_YN>N</DUP_YN>
+      <MENU_OPEN_TYPE>TILE</MENU_OPEN_TYPE>
+      <DISP_YN>Y</DISP_YN>
+      <FILE_LTH>0</FILE_LTH>
+    </EAMMenuInfo_INOUT>
+    <EAMMenuInfo_INOUT>
+      <BASE_STATE />
+      <ABBR_NM>과내</ABBR_NM>
+      <BUSINESS_TYP>SE</BUSINESS_TYP>
+      <MENU_CD>SE_INFO_ORD_SelectReservation</MENU_CD>
+      <BIZ_MENU_ID>10005585</BIZ_MENU_ID>
+      <MENU_ID>SE_INFO_ORD_SelectReservation</MENU_ID>
+      <MENU_NM>예약조회</MENU_NM>
+      <FOLDER_YN>N</FOLDER_YN>
+      <UP_MENU_CD>SE_EXM_RSV</UP_MENU_CD>
+      <USE_YN>Y</USE_YN>
+      <SORT_SEQ>2</SORT_SEQ>
+      <ASSEMBLY_NM>HIS.MS.IV.SD.RC.UI</ASSEMBLY_NM>
+      <APP_URL>/SelectReservation.xaml?EAMPARAM=SE</APP_URL>
+      <ICON_URI>HISFILE01/CM/IMAGE/MenuICON/MS/SE_INFO_ORDRSV_SelectReservation.png</ICON_URI>
+      <MENU_OPEN_TYPE>TILE</MENU_OPEN_TYPE>
+      <DISP_YN>Y</DISP_YN>
+      <FILE_LTH>0</FILE_LTH>
+    </EAMMenuInfo_INOUT>
+    <EAMMenuInfo_INOUT>
+      <BASE_STATE />
+      <ABBR_NM>영상</ABBR_NM>
+      <BUSINESS_TYP>RM</BUSINESS_TYP>
+      <MENU_CD>RM_EXM_SEL_SelectOrderPrescription</MENU_CD>
+      <BIZ_MENU_ID>200747</BIZ_MENU_ID>
+      <MENU_ID>RM_EXM_SEL_SelectOrderPrescription</MENU_ID>
+      <MENU_NM>오더조회</MENU_NM>
+      <FOLDER_YN>N</FOLDER_YN>
+      <UP_MENU_CD>RM_EXM_SEL</UP_MENU_CD>
+      <USE_YN>Y</USE_YN>
+      <SORT_SEQ>4</SORT_SEQ>
+      <ASSEMBLY_NM>HIS.MS.IV.RM.CO.UI</ASSEMBLY_NM>
+      <APP_URL>/SelectOrderPrescription.xaml</APP_URL>
+      <ICON_URI>HISFILE01/CM/IMAGE/MenuICON/MS/RM_EXM_SEL_SelectOrderPrescription.png</ICON_URI>
+      <DUP_YN>Y</DUP_YN>
+      <MENU_OPEN_TYPE>TILE</MENU_OPEN_TYPE>
+      <MODAL_YN>N</MODAL_YN>
+      <TILE_FULL_SIZE_YN>N</TILE_FULL_SIZE_YN>
+      <DISP_YN>Y</DISP_YN>
+      <OGCP_FILE_PATH>/HISFILE02/CM/MngGdln/3/2017_8_7_COEMR/2091295c-630d-4e8e-b995-2349441319f6.doc</OGCP_FILE_PATH>
+      <EMPL_FILE_PATH>/HISFILE02/CM/MngGdln/3/2017_8_7_COEMR/8533c728-1a25-4fb8-b0fb-8ecfb9652314.pdf</EMPL_FILE_PATH>
+      <FILE_LTH>0</FILE_LTH>
+    </EAMMenuInfo_INOUT>
+    <EAMMenuInfo_INOUT>
+      <BASE_STATE />
+      <ABBR_NM>영상</ABBR_NM>
+      <BUSINESS_TYP>RM</BUSINESS_TYP>
+      <MENU_CD>RM_EXM_RLT_InsertIpdrCbIptn</MENU_CD>
+      <BIZ_MENU_ID>108182</BIZ_MENU_ID>
+      <MENU_ID>RM_EXM_RLT_InsertIpdrCbIptn</MENU_ID>
+      <MENU_NM>판독의별 판독등록</MENU_NM>
+      <FOLDER_YN>N</FOLDER_YN>
+      <UP_MENU_CD>RM_EXM_RLT</UP_MENU_CD>
+      <USE_YN>Y</USE_YN>
+      <SORT_SEQ>1</SORT_SEQ>
+      <ASSEMBLY_NM>HIS.MS.IV.ER.RM.UI</ASSEMBLY_NM>
+      <APP_URL>/InsertIpdrCbIptn.xaml</APP_URL>
+      <ICON_URI>HISFILE01/CM/IMAGE/MenuICON/MS/RM_EXM_RLT_InsertIpdrCbIptn.png</ICON_URI>
+      <DUP_YN>N</DUP_YN>
+      <MENU_OPEN_TYPE>POPUP</MENU_OPEN_TYPE>
+      <MODAL_YN>N</MODAL_YN>
+      <TILE_FULL_SIZE_YN>N</TILE_FULL_SIZE_YN>
+      <DISP_YN>Y</DISP_YN>
+      <AUTH_CHECK_YN>N</AUTH_CHECK_YN>
+      <OGCP_FILE_PATH>/HISFILE02/CM/MngGdln/3/2017_8_7_COEMR/f157164e-46cb-4ebe-90f8-fcfc954b40e4.doc</OGCP_FILE_PATH>
+      <EMPL_FILE_PATH>/HISFILE02/CM/MngGdln/3/2017_8_7_COEMR/536007a1-2033-47b5-951b-2d3557ec5bc4.pdf</EMPL_FILE_PATH>
+      <FILE_LTH>0</FILE_LTH>
+    </EAMMenuInfo_INOUT>
+    <EAMMenuInfo_INOUT>
+      <BASE_STATE />
+      <ABBR_NM>영상</ABBR_NM>
+      <BUSINESS_TYP>RM</BUSINESS_TYP>
+      <MENU_CD>RM_POPUP_InsertExmDrugActing</MENU_CD>
+      <BIZ_MENU_ID>225698</BIZ_MENU_ID>
+      <MENU_ID>RM_POPUP_InsertExmDrugActing</MENU_ID>
+      <MENU_NM>검사약 Acting</MENU_NM>
+      <FOLDER_YN>N</FOLDER_YN>
+      <UP_MENU_CD>RM_POPUP</UP_MENU_CD>
+      <USE_YN>Y</USE_YN>
+      <SORT_SEQ>85</SORT_SEQ>
+      <ASSEMBLY_NM>HIS.MS.IV.SE.EX.UI</ASSEMBLY_NM>
+      <APP_URL>/InsertExaminationDrugActingRegistration.xaml</APP_URL>
+      <DUP_YN>N</DUP_YN>
+      <MENU_OPEN_TYPE>POPUP</MENU_OPEN_TYPE>
+      <DISP_YN>N</DISP_YN>
+      <AUTH_CHECK_YN>N</AUTH_CHECK_YN>
+      <FILE_LTH>0</FILE_LTH>
+    </EAMMenuInfo_INOUT>
+    <EAMMenuInfo_INOUT>
+      <BASE_STATE />
+      <ABBR_NM>영상</ABBR_NM>
+      <BUSINESS_TYP>RM</BUSINESS_TYP>
+      <MENU_CD>RM_POPUP_SaveCode</MENU_CD>
+      <BIZ_MENU_ID>10007914</BIZ_MENU_ID>
+      <MENU_ID>RM_POPUP_SaveCode</MENU_ID>
+      <MENU_NM>코드등록</MENU_NM>
+      <FOLDER_YN>N</FOLDER_YN>
+      <UP_MENU_CD>RM_POPUP</UP_MENU_CD>
+      <USE_YN>Y</USE_YN>
+      <SORT_SEQ>94</SORT_SEQ>
+      <ASSEMBLY_NM>HIS.MS.IV.RM.MS.UI</ASSEMBLY_NM>
+      <APP_URL>/SaveCode.xaml?EAMPARAM=BR1</APP_URL>
+      <MENU_OPEN_TYPE>POPUP</MENU_OPEN_TYPE>
+      <DISP_YN>N</DISP_YN>
+      <AUTH_CHECK_YN>N</AUTH_CHECK_YN>
+      <FILE_LTH>0</FILE_LTH>
+    </EAMMenuInfo_INOUT>
+    <EAMMenuInfo_INOUT>
+      <BASE_STATE />
+      <ABBR_NM>영상</ABBR_NM>
+      <BUSINESS_TYP>RM</BUSINESS_TYP>
+      <MENU_CD>RM_HSP_CNF_SaveHspInIptnCntManagement</MENU_CD>
+      <BIZ_MENU_ID>10011078</BIZ_MENU_ID>
+      <MENU_ID>RM_HSP_CNF_SaveHspInIptnCntManagement</MENU_ID>
+      <MENU_NM>원내판독건수 마스터</MENU_NM>
+      <FOLDER_YN>N</FOLDER_YN>
+      <UP_MENU_CD>RM_RSV_CNF</UP_MENU_CD>
+      <USE_YN>Y</USE_YN>
+      <SORT_SEQ>15</SORT_SEQ>
+      <ASSEMBLY_NM>HIS.MS.IV.RM.MS.UI</ASSEMBLY_NM>
+      <APP_URL>/SaveHspInIptnCntManagement</APP_URL>
+      <MENU_OPEN_TYPE>POPUP</MENU_OPEN_TYPE>
+      <DISP_YN>Y</DISP_YN>
+      <AUTH_CHECK_YN>N</AUTH_CHECK_YN>
+      <FILE_LTH>0</FILE_LTH>
+    </EAMMenuInfo_INOUT>
+    <EAMMenuInfo_INOUT>
+      <BASE_STATE />
+      <ABBR_NM>영상</ABBR_NM>
+      <BUSINESS_TYP>RM</BUSINESS_TYP>
+      <MENU_CD>RM_EXM_RLT_SelectNonInterpretation</MENU_CD>
+      <BIZ_MENU_ID>108193</BIZ_MENU_ID>
+      <MENU_ID>RM_EXM_RLT_SelectNonInterpretation</MENU_ID>
+      <MENU_NM>미판독조회</MENU_NM>
+      <FOLDER_YN>N</FOLDER_YN>
+      <UP_MENU_CD>RM_EXM_RSC</UP_MENU_CD>
+      <USE_YN>Y</USE_YN>
+      <SORT_SEQ>6</SORT_SEQ>
+      <ASSEMBLY_NM>HIS.MS.IV.NI.RT.UI</ASSEMBLY_NM>
+      <APP_URL>/SelectNonInterpretation.xaml?EAMPARAM=BR1</APP_URL>
+      <ICON_URI>HISFILE01/CM/IMAGE/MenuICON/MS/RM_EXM_RLT_SelectNonInterpretation.png</ICON_URI>
+      <DUP_YN>N</DUP_YN>
+      <MENU_OPEN_TYPE>POPUP</MENU_OPEN_TYPE>
+      <MODAL_YN>N</MODAL_YN>
+      <TILE_FULL_SIZE_YN>N</TILE_FULL_SIZE_YN>
+      <DISP_YN>Y</DISP_YN>
+      <OGCP_FILE_PATH>/HISFILE02/CM/MngGdln/3/2017_8_7_COEMR/9b6c0449-9fb0-4cfc-99c6-5ad6c92e9566.doc</OGCP_FILE_PATH>
+      <EMPL_FILE_PATH>/HISFILE02/CM/MngGdln/3/2017_8_7_COEMR/0eb0f64e-dbb9-40c1-8686-0c4229a04c20.pdf</EMPL_FILE_PATH>
+      <FILE_LTH>0</FILE_LTH>
+    </EAMMenuInfo_INOUT>
+    <EAMMenuInfo_INOUT>
+      <BASE_STATE />
+      <ABBR_NM>영상</ABBR_NM>
+      <BUSINESS_TYP>RM</BUSINESS_TYP>
+      <MENU_CD>RM_RSV_CNF_SaveExaminationItemRegistration_New</MENU_CD>
+      <BIZ_MENU_ID>204559</BIZ_MENU_ID>
+      <MENU_ID>RM_RSV_CNF_SaveExaminationItemRegistration_New</MENU_ID>
+      <MENU_NM>검사항목(상세)등록</MENU_NM>
+      <FOLDER_YN>N</FOLDER_YN>
+      <UP_MENU_CD>RM_RSV_CNF</UP_MENU_CD>
+      <USE_YN>Y</USE_YN>
+      <SORT_SEQ>3</SORT_SEQ>
+      <ASSEMBLY_NM>HIS.MS.IV.SD.MS.UI</ASSEMBLY_NM>
+      <APP_URL>/SaveExaminationMaster.xaml?EAMPARAM=BR1</APP_URL>
+      <ICON_URI>HISFILE01/CM/IMAGE/MenuICON/MS/RM_RSV_CNF_SaveExaminationItemRegistration_New.png</ICON_URI>
+      <DUP_YN>N</DUP_YN>
+      <MENU_OPEN_TYPE>POPUP</MENU_OPEN_TYPE>
+      <MODAL_YN>N</MODAL_YN>
+      <TILE_FULL_SIZE_YN>N</TILE_FULL_SIZE_YN>
+      <DISP_YN>Y</DISP_YN>
+      <OGCP_FILE_PATH>/HISFILE02/CM/MngGdln/3/2017_8_7_COEMR/f41bfd87-8d84-4f1f-b6ea-efee3563d72c.doc</OGCP_FILE_PATH>
+      <EMPL_FILE_PATH>/HISFILE02/CM/MngGdln/3/2017_8_7_COEMR/c4d5563e-234b-41ad-a46d-28ccec225761.pdf</EMPL_FILE_PATH>
+      <FILE_LTH>0</FILE_LTH>
+    </EAMMenuInfo_INOUT>
+    <EAMMenuInfo_INOUT>
+      <BASE_STATE />
+      <ABBR_NM>재활</ABBR_NM>
+      <BUSINESS_TYP>RE</BUSINESS_TYP>
+      <MENU_CD>RE_THE_RSVMGT_SaveRHTManagementV1</MENU_CD>
+      <BIZ_MENU_ID>10012939</BIZ_MENU_ID>
+      <MENU_ID>RE_THE_RSVMGT_SaveRHTManagementV1</MENU_ID>
+      <MENU_NM>재활메인(코디)-NEW</MENU_NM>
+      <FOLDER_YN>N</FOLDER_YN>
+      <UP_MENU_CD>RE_THE_RSVMGT</UP_MENU_CD>
+      <USE_YN>Y</USE_YN>
+      <SORT_SEQ>13</SORT_SEQ>
+      <ASSEMBLY_NM>HIS.MS.TR.RE.RS.UI</ASSEMBLY_NM>
+      <APP_URL>/SaveRHTManagementV1.xaml?EAMPARAM=C</APP_URL>
+      <ICON_URI>HISFILE01/CM/IMAGE/MenuICON/MS/RE_THE_RSVMGT_SaveRHTManagementC.png</ICON_URI>
+      <MENU_OPEN_TYPE>POPUP</MENU_OPEN_TYPE>
+      <MODAL_YN>N</MODAL_YN>
+      <TILE_FULL_SIZE_YN>N</TILE_FULL_SIZE_YN>
+      <DISP_YN>Y</DISP_YN>
+      <AUTH_CHECK_YN>N</AUTH_CHECK_YN>
+      <FILE_LTH>0</FILE_LTH>
+    </EAMMenuInfo_INOUT>
+    <EAMMenuInfo_INOUT>
+      <BASE_STATE />
+      <ABBR_NM>재활</ABBR_NM>
+      <BUSINESS_TYP>RE</BUSINESS_TYP>
+      <MENU_CD>RE_THE_RSVMGT_SaveRHTPerformManagement</MENU_CD>
+      <BIZ_MENU_ID>10005849</BIZ_MENU_ID>
+      <MENU_ID>RE_THE_RSVMGT_SaveRHTPerformManagement</MENU_ID>
+      <MENU_NM>재활메인(치료)</MENU_NM>
+      <FOLDER_YN>N</FOLDER_YN>
+      <UP_MENU_CD>RE_THE_RSVMGT</UP_MENU_CD>
+      <USE_YN>Y</USE_YN>
+      <SORT_SEQ>7</SORT_SEQ>
+      <ASSEMBLY_NM>HIS.MS.TR.RE.RS.UI</ASSEMBLY_NM>
+      <APP_URL>/SaveRHTManagementV3.xaml</APP_URL>
+      <ICON_URI>HISFILE01/CM/IMAGE/MenuICON/MS/RE_THE_RSVMGT_SaveRHTManagementR.png</ICON_URI>
+      <MENU_OPEN_TYPE>POPUP</MENU_OPEN_TYPE>
+      <MODAL_YN>N</MODAL_YN>
+      <TILE_FULL_SIZE_YN>N</TILE_FULL_SIZE_YN>
+      <DISP_YN>Y</DISP_YN>
+      <FILE_LTH>0</FILE_LTH>
+    </EAMMenuInfo_INOUT>
+    <EAMMenuInfo_INOUT>
+      <BASE_STATE />
+      <ABBR_NM>재활</ABBR_NM>
+      <BUSINESS_TYP>RE</BUSINESS_TYP>
+      <MENU_CD>RE_THE_RSVMGT_SaveRHTManagementC</MENU_CD>
+      <BIZ_MENU_ID>30004220</BIZ_MENU_ID>
+      <MENU_ID>RE_THE_RSVMGT_SaveRHTManagementC</MENU_ID>
+      <MENU_NM>재활메인(코디)</MENU_NM>
+      <FOLDER_YN>N</FOLDER_YN>
+      <UP_MENU_CD>RE_THE_RSVMGT</UP_MENU_CD>
+      <USE_YN>Y</USE_YN>
+      <SORT_SEQ>6</SORT_SEQ>
+      <ASSEMBLY_NM>HIS.MS.TR.RE.RS.UI</ASSEMBLY_NM>
+      <APP_URL>/SaveRHTManagement.xaml?EAMPARAM=C</APP_URL>
+      <ICON_URI>HISFILE01/CM/IMAGE/MenuICON/MS/RE_THE_RSVMGT_SaveRHTManagementC.png</ICON_URI>
+      <MENU_OPEN_TYPE>POPUP</MENU_OPEN_TYPE>
+      <MODAL_YN>N</MODAL_YN>
+      <TILE_FULL_SIZE_YN>N</TILE_FULL_SIZE_YN>
+      <DISP_YN>Y</DISP_YN>
+      <AUTH_CHECK_YN>N</AUTH_CHECK_YN>
+      <FILE_LTH>0</FILE_LTH>
+    </EAMMenuInfo_INOUT>
+    <EAMMenuInfo_INOUT>
+      <BASE_STATE />
+      <ABBR_NM>재활</ABBR_NM>
+      <BUSINESS_TYP>RE</BUSINESS_TYP>
+      <MENU_CD>RE_ORD_ORDMGT_InsertRHTPrescribe</MENU_CD>
+      <BIZ_MENU_ID>265521</BIZ_MENU_ID>
+      <MENU_ID>RE_ORD_ORDMGT_InsertRHTPrescribe</MENU_ID>
+      <MENU_NM>재활처방등록</MENU_NM>
+      <FOLDER_YN>N</FOLDER_YN>
+      <UP_MENU_CD>RE_ORD_ORDMGT</UP_MENU_CD>
+      <USE_YN>Y</USE_YN>
+      <SORT_SEQ>1</SORT_SEQ>
+      <ASSEMBLY_NM>HIS.MS.TR.RE.OR.UI</ASSEMBLY_NM>
+      <APP_URL>/InsertRHTPrescribeV2.xaml</APP_URL>
+      <ICON_URI>HISFILE01/CM/IMAGE/MenuICON/MS/RE_ORD_ORDMGT_InsertRHTPrescribe.png</ICON_URI>
+      <DUP_YN>Y</DUP_YN>
+      <MENU_OPEN_TYPE>POPUP</MENU_OPEN_TYPE>
+      <MODAL_YN>N</MODAL_YN>
+      <TILE_FULL_SIZE_YN>N</TILE_FULL_SIZE_YN>
+      <DISP_YN>Y</DISP_YN>
+      <AUTH_CHECK_YN>N</AUTH_CHECK_YN>
+      <OGCP_FILE_PATH>/HISFILE02/CM/MngGdln/3/2017_8_7_COEMR/78369010-20eb-4b9c-a75d-faaefd9b045f.doc</OGCP_FILE_PATH>
+      <EMPL_FILE_PATH>/HISFILE02/CM/MngGdln/3/2017_8_7_COEMR/00a9aeea-f644-4e52-bb9b-0fc8f6a669c6.pdf</EMPL_FILE_PATH>
+      <FILE_LTH>0</FILE_LTH>
+    </EAMMenuInfo_INOUT>
+    <EAMMenuInfo_INOUT>
+      <BASE_STATE />
+      <ABBR_NM>재활</ABBR_NM>
+      <BUSINESS_TYP>RE</BUSINESS_TYP>
+      <MENU_CD>RE_THE_TTMMGT_UpdateVCThrpChov</MENU_CD>
+      <BIZ_MENU_ID>60005798</BIZ_MENU_ID>
+      <MENU_ID>RE_THE_TTMMGT_UpdateVCThrpChov</MENU_ID>
+      <MENU_NM>휴가 인수인계</MENU_NM>
+      <FOLDER_YN>N</FOLDER_YN>
+      <UP_MENU_CD>RE_THE_TTMMGT</UP_MENU_CD>
+      <USE_YN>Y</USE_YN>
+      <SORT_SEQ>2</SORT_SEQ>
+      <ASSEMBLY_NM>HIS.MS.TR.RE.RS.UI</ASSEMBLY_NM>
+      <APP_URL>/UpdateThrpChov.xaml?SCH_MOVE_EXCH=3</APP_URL>
+      <ICON_URI>HISFILE01/CM/IMAGE/MenuICON/MS/RE_THE_TTMMGT_UpdateVCThrpChov.png</ICON_URI>
+      <DUP_YN>N</DUP_YN>
+      <MENU_OPEN_TYPE>POPUP</MENU_OPEN_TYPE>
+      <DR_OPEN_TYPE>POPUP</DR_OPEN_TYPE>
+      <MS_OPEN_TYPE>POPUP</MS_OPEN_TYPE>
+      <MODAL_YN>N</MODAL_YN>
+      <TILE_FULL_SIZE_YN>N</TILE_FULL_SIZE_YN>
+      <DISP_YN>Y</DISP_YN>
+      <AUTH_CHECK_YN>N</AUTH_CHECK_YN>
+      <FILE_LTH>0</FILE_LTH>
+    </EAMMenuInfo_INOUT>
+    <EAMMenuInfo_INOUT>
+      <BASE_STATE />
+      <ABBR_NM>재활</ABBR_NM>
+      <BUSINESS_TYP>RE</BUSINESS_TYP>
+      <MENU_CD>RE_INF_STAMGT_SelectRHTIntegrationStatistics</MENU_CD>
+      <BIZ_MENU_ID>177188</BIZ_MENU_ID>
+      <MENU_ID>RE_INF_STAMGT_SelectRHTIntegrationStatistics</MENU_ID>
+      <MENU_NM>재활통계</MENU_NM>
+      <FOLDER_YN>N</FOLDER_YN>
+      <UP_MENU_CD>RE_INF_STAMGT</UP_MENU_CD>
+      <USE_YN>Y</USE_YN>
+      <SORT_SEQ>2</SORT_SEQ>
+      <ASSEMBLY_NM>HIS.MS.TR.RE.ST.UI</ASSEMBLY_NM>
+      <APP_URL>/SelectRHTIntegrationStatistics.xaml</APP_URL>
+      <ICON_URI>HISFILE01/CM/IMAGE/MenuICON/MS/RE_INF_STAMGT_SelectRHTIntegrationStatistics.png</ICON_URI>
+      <MENU_OPEN_TYPE>POPUP</MENU_OPEN_TYPE>
+      <MODAL_YN>N</MODAL_YN>
+      <TILE_FULL_SIZE_YN>N</TILE_FULL_SIZE_YN>
+      <DISP_YN>Y</DISP_YN>
+      <OGCP_FILE_PATH>/HISFILE02/CM/MngGdln/3/2017_8_7_COEMR/b6887ced-6a23-40c8-b54c-b7782789a641.doc</OGCP_FILE_PATH>
+      <EMPL_FILE_PATH>/HISFILE02/CM/MngGdln/3/2017_8_7_COEMR/bbd392bb-1202-4765-a6bb-ff97608857d1.pdf</EMPL_FILE_PATH>
+      <FILE_LTH>0</FILE_LTH>
+    </EAMMenuInfo_INOUT>
+    <EAMMenuInfo_INOUT>
+      <BASE_STATE />
+      <ABBR_NM>진검</ABBR_NM>
+      <BUSINESS_TYP>LM</BUSINESS_TYP>
+      <MENU_CD>LM_MASTER_MAIN_SaveDexmComnCdMgmt</MENU_CD>
+      <BIZ_MENU_ID>10005648</BIZ_MENU_ID>
+      <MENU_ID>LM_MASTER_MAIN_SaveDexmComnCdMgmt</MENU_ID>
+      <MENU_NM>공통코드관리</MENU_NM>
+      <FOLDER_YN>N</FOLDER_YN>
+      <UP_MENU_CD>LM_MASTER_MAIN</UP_MENU_CD>
+      <USE_YN>Y</USE_YN>
+      <SORT_SEQ>6</SORT_SEQ>
+      <ASSEMBLY_NM>HIS.MS.IT.LM.CO.UI</ASSEMBLY_NM>
+      <APP_URL>/SaveDexmComnCdMgmt.xaml?OrdCtgCd=CP</APP_URL>
+      <ICON_URI>HISFILE01/CM/IMAGE/MenuICON/MS/LM_MASTER_MAIN_SaveDexmComnCdMgmt.png</ICON_URI>
+      <DUP_YN>N</DUP_YN>
+      <MENU_OPEN_TYPE>POPUP</MENU_OPEN_TYPE>
+      <DISP_YN>Y</DISP_YN>
+      <FILE_LTH>0</FILE_LTH>
+    </EAMMenuInfo_INOUT>
+    <EAMMenuInfo_INOUT>
+      <BASE_STATE />
+      <ABBR_NM>진검</ABBR_NM>
+      <BUSINESS_TYP>LM</BUSINESS_TYP>
+      <MENU_CD>LM_RESULT_GENEXAMNG_SaveExamResultMgmtTypeA</MENU_CD>
+      <BIZ_MENU_ID>10007733</BIZ_MENU_ID>
+      <MENU_ID>LM_RESULT_GENEXAMNG_SaveExamResultMgmtTypeA</MENU_ID>
+      <MENU_NM>검사결과관리</MENU_NM>
+      <FOLDER_YN>N</FOLDER_YN>
+      <UP_MENU_CD>LM_EXMNG_GEMNG</UP_MENU_CD>
+      <USE_YN>Y</USE_YN>
+      <SORT_SEQ>1</SORT_SEQ>
+      <ASSEMBLY_NM>HIS.MS.IT.LM.GT.UI</ASSEMBLY_NM>
+      <APP_URL>/SaveExamResultMgmt.xaml?OrdCtgCd=CP&amp;TYPE=A</APP_URL>
+      <ICON_URI>HISFILE01/CM/IMAGE/MenuICON/MS/LM_RESULT_GENEXAMNG_SaveExaminationResultManagement.png</ICON_URI>
+      <MENU_OPEN_TYPE>POPUP</MENU_OPEN_TYPE>
+      <WIN_VAL>0;0;1950;1000</WIN_VAL>
+      <DISP_YN>Y</DISP_YN>
+      <FILE_LTH>0</FILE_LTH>
+    </EAMMenuInfo_INOUT>
+    <EAMMenuInfo_INOUT>
+      <BASE_STATE />
+      <ABBR_NM>진검</ABBR_NM>
+      <BUSINESS_TYP>LM</BUSINESS_TYP>
+      <MENU_CD>LM_MASTER_MAIN_SaveExaminationInformationRegistration</MENU_CD>
+      <BIZ_MENU_ID>197918</BIZ_MENU_ID>
+      <MENU_ID>LM_MASTER_MAIN_SaveExaminationInformationRegistration</MENU_ID>
+      <MENU_NM>검사정보관리</MENU_NM>
+      <FOLDER_YN>N</FOLDER_YN>
+      <UP_MENU_CD>LM_MASTER_MAIN</UP_MENU_CD>
+      <USE_YN>Y</USE_YN>
+      <SORT_SEQ>2</SORT_SEQ>
+      <ASSEMBLY_NM>HIS.MS.IT.LM.TC.UI</ASSEMBLY_NM>
+      <APP_URL>/SaveExaminationInformationRegistration.xaml?OrdCtgCd=CP</APP_URL>
+      <ICON_URI>HISFILE01/CM/IMAGE/MenuICON/MS/LM_MASTER_MAIN_SaveExaminationInformationRegistration_1.png</ICON_URI>
+      <DUP_YN>Y</DUP_YN>
+      <MENU_OPEN_TYPE>POPUP</MENU_OPEN_TYPE>
+      <WIN_VAL>0;0;1950;1000</WIN_VAL>
+      <DISP_YN>Y</DISP_YN>
+      <OGCP_FILE_PATH>/HISFILE02/CM/MngGdln/3/2017_8_7_COEMR/685d9ec0-ee30-446c-967b-8f9ecea94a88.doc</OGCP_FILE_PATH>
+      <EMPL_FILE_PATH>/HISFILE02/CM/MngGdln/3/2017_8_7_COEMR/cecc1c0a-db02-4ebb-8f23-9541dab24290.pdf</EMPL_FILE_PATH>
+      <FILE_LTH>0</FILE_LTH>
+    </EAMMenuInfo_INOUT>
+    <EAMMenuInfo_INOUT>
+      <BASE_STATE />
+      <ABBR_NM>통합</ABBR_NM>
+      <BUSINESS_TYP>TD</BUSINESS_TYP>
+      <MENU_CD>TD_AUTH_SUB_SaveIntgRsltMgmt</MENU_CD>
+      <BIZ_MENU_ID>10003383</BIZ_MENU_ID>
+      <MENU_ID>TD_AUTH_SUB_SaveIntgRsltMgmt</MENU_ID>
+      <MENU_NM>통합결과 메뉴관리</MENU_NM>
+      <FOLDER_YN>N</FOLDER_YN>
+      <UP_MENU_CD>TD_AUTH_SUB</UP_MENU_CD>
+      <USE_YN>Y</USE_YN>
+      <SORT_SEQ>2</SORT_SEQ>
+      <ASSEMBLY_NM>HIS.MS.EC.CS.CO.UI</ASSEMBLY_NM>
+      <APP_URL>/SaveIntgRsltMenuMgmt.xaml?EAMPARAM=M</APP_URL>
+      <ICON_URI>HISFILE01/CM/IMAGE/MenuICON/MS/TD_AUTH_SUB_SaveIntgRsltMgmt.png</ICON_URI>
+      <MENU_OPEN_TYPE>TILE</MENU_OPEN_TYPE>
+      <DISP_YN>Y</DISP_YN>
+      <AUTH_CHECK_YN>N</AUTH_CHECK_YN>
+      <FILE_LTH>0</FILE_LTH>
+    </EAMMenuInfo_INOUT>
+    <EAMMenuInfo_INOUT>
+      <BASE_STATE />
+      <ABBR_NM>CVR</ABBR_NM>
+      <BUSINESS_TYP>RM</BUSINESS_TYP>
+      <MENU_CD>RM_STA_ETC_SelectCvrCrccm</MENU_CD>
+      <BIZ_MENU_ID>225786</BIZ_MENU_ID>
+      <MENU_ID>RM_STA_ETC_SelectCvrCrccm</MENU_ID>
+      <MENU_NM>이상 검사 결과 보고 조회(영상의학 CVR)</MENU_NM>
+      <FOLDER_YN>N</FOLDER_YN>
+      <UP_MENU_CD>RM_EXM_RSC</UP_MENU_CD>
+      <USE_YN>Y</USE_YN>
+      <SORT_SEQ>1</SORT_SEQ>
+      <ASSEMBLY_NM>HIS.MS.IV.SD.TM.UI</ASSEMBLY_NM>
+      <APP_URL>/ManagementCVR.xaml?EAMPARAM=BR1</APP_URL>
+      <ICON_URI>HISFILE01/CM/IMAGE/MenuICON/MS/SE_EXM_EXAEXE_ManagementCVR.png</ICON_URI>
+      <MENU_OPEN_TYPE>POPUP</MENU_OPEN_TYPE>
+      <DISP_YN>Y</DISP_YN>
+      <FILE_LTH>0</FILE_LTH>
+    </EAMMenuInfo_INOUT>
+  </FAVEAMINFO_LIST>
+  <FAV_TABLE>
+    <TableInfo_INOUT>
+      <BASE_STATE />
+      <GROUP>영상</GROUP>
+      <TABLE_NAME>MSERMAAD</TABLE_NAME>
+      <TABLE_COMMENTS>환자별검사정보</TABLE_COMMENTS>
+      <SEQ>0</SEQ>
+      <OWNER>HSUP</OWNER>
+      <SCRN_MRK_SEQ>0</SCRN_MRK_SEQ>
+      <COLUMN_POSITION>0</COLUMN_POSITION>
+    </TableInfo_INOUT>
+    <TableInfo_INOUT>
+      <BASE_STATE />
+      <GROUP>처방</GROUP>
+      <TABLE_NAME>MOOOREXM</TABLE_NAME>
+      <TABLE_COMMENTS>환자검사처방기본</TABLE_COMMENTS>
+      <SEQ>0</SEQ>
+      <OWNER>HMED</OWNER>
+      <SCRN_MRK_SEQ>0</SCRN_MRK_SEQ>
+      <COLUMN_POSITION>0</COLUMN_POSITION>
+    </TableInfo_INOUT>
+    <TableInfo_INOUT>
+      <BASE_STATE />
+      <Mode>S</Mode>
+      <DBGbn>APP</DBGbn>
+      <ServiceName>WB</ServiceName>
+      <GROUP>감염</GROUP>
+      <TABLE_NAME>MOOPTICC</TABLE_NAME>
+      <TABLE_COMMENTS>감염임신수유정보코드</TABLE_COMMENTS>
+      <SEQ>0</SEQ>
+      <OWNER>HMED</OWNER>
+      <SCRN_MRK_SEQ>0</SCRN_MRK_SEQ>
+      <COLUMN_POSITION>0</COLUMN_POSITION>
+    </TableInfo_INOUT>
+    <TableInfo_INOUT>
+      <BASE_STATE />
+      <Mode>S</Mode>
+      <DBGbn>APP</DBGbn>
+      <ServiceName>WB</ServiceName>
+      <GROUP>감염</GROUP>
+      <TABLE_NAME>MOOPTIPD</TABLE_NAME>
+      <TABLE_COMMENTS>환자감염임신수유정보</TABLE_COMMENTS>
+      <SEQ>0</SEQ>
+      <OWNER>HMED</OWNER>
+      <SCRN_MRK_SEQ>0</SCRN_MRK_SEQ>
+      <COLUMN_POSITION>0</COLUMN_POSITION>
+    </TableInfo_INOUT>
+    <TableInfo_INOUT>
+      <BASE_STATE />
+      <GROUP>재활</GROUP>
+      <TABLE_NAME>MSTRHODD</TABLE_NAME>
+      <TABLE_COMMENTS>재활치료처방일정정보</TABLE_COMMENTS>
+      <SEQ>0</SEQ>
+      <OWNER>HSUP</OWNER>
+      <SCRN_MRK_SEQ>0</SCRN_MRK_SEQ>
+      <COLUMN_POSITION>0</COLUMN_POSITION>
+    </TableInfo_INOUT>
+    <TableInfo_INOUT>
+      <BASE_STATE />
+      <GROUP>재활</GROUP>
+      <TABLE_NAME>MSTRHSLD</TABLE_NAME>
+      <TABLE_COMMENTS>재활치료사별예약슬롯정보</TABLE_COMMENTS>
+      <SEQ>0</SEQ>
+      <OWNER>HSUP</OWNER>
+      <SCRN_MRK_SEQ>0</SCRN_MRK_SEQ>
+      <COLUMN_POSITION>0</COLUMN_POSITION>
+    </TableInfo_INOUT>
+    <TableInfo_INOUT>
+      <BASE_STATE />
+      <GROUP>재활</GROUP>
+      <TABLE_NAME>MSTRHSUD</TABLE_NAME>
+      <TABLE_COMMENTS>재활치료수가발행정보</TABLE_COMMENTS>
+      <SEQ>0</SEQ>
+      <OWNER>HSUP</OWNER>
+      <SCRN_MRK_SEQ>0</SCRN_MRK_SEQ>
+      <COLUMN_POSITION>0</COLUMN_POSITION>
+    </TableInfo_INOUT>
+    <TableInfo_INOUT>
+      <BASE_STATE />
+      <Mode>S</Mode>
+      <DBGbn>APP</DBGbn>
+      <ServiceName>WB</ServiceName>
+      <GROUP>영상</GROUP>
+      <TABLE_NAME>MSERMMMC</TABLE_NAME>
+      <TABLE_COMMENTS>검사항목코드</TABLE_COMMENTS>
+      <SEQ>0</SEQ>
+      <OWNER>HSUP</OWNER>
+      <SCRN_MRK_SEQ>0</SCRN_MRK_SEQ>
+      <COLUMN_POSITION>0</COLUMN_POSITION>
+    </TableInfo_INOUT>
+    <TableInfo_INOUT>
+      <BASE_STATE />
+      <GROUP>처방</GROUP>
+      <TABLE_NAME>CCOOCBAC</TABLE_NAME>
+      <TABLE_COMMENTS>처방코드</TABLE_COMMENTS>
+      <SEQ>0</SEQ>
+      <OWNER>HMED</OWNER>
+      <SCRN_MRK_SEQ>0</SCRN_MRK_SEQ>
+      <COLUMN_POSITION>0</COLUMN_POSITION>
+    </TableInfo_INOUT>
+    <TableInfo_INOUT>
+      <BASE_STATE />
+      <GROUP>수가</GROUP>
+      <TABLE_NAME>AIMIRPMC</TABLE_NAME>
+      <TABLE_COMMENTS>수가코드</TABLE_COMMENTS>
+      <SEQ>0</SEQ>
+      <OWNER>HBIL</OWNER>
+      <SCRN_MRK_SEQ>0</SCRN_MRK_SEQ>
+      <COLUMN_POSITION>0</COLUMN_POSITION>
+    </TableInfo_INOUT>
+    <TableInfo_INOUT>
+      <BASE_STATE />
+      <GROUP>처방</GROUP>
+      <TABLE_NAME>MOOORFED</TABLE_NAME>
+      <TABLE_COMMENTS>환자처방료정보</TABLE_COMMENTS>
+      <SEQ>0</SEQ>
+      <OWNER>HMED</OWNER>
+      <SCRN_MRK_SEQ>0</SCRN_MRK_SEQ>
+      <COLUMN_POSITION>0</COLUMN_POSITION>
+    </TableInfo_INOUT>
+    <TableInfo_INOUT>
+      <BASE_STATE />
+      <GROUP>영상</GROUP>
+      <TABLE_NAME>MSERMAMD</TABLE_NAME>
+      <TABLE_COMMENTS>진료재료소모정보</TABLE_COMMENTS>
+      <SEQ>0</SEQ>
+      <OWNER>HSUP</OWNER>
+      <SCRN_MRK_SEQ>0</SCRN_MRK_SEQ>
+      <COLUMN_POSITION>0</COLUMN_POSITION>
+    </TableInfo_INOUT>
+    <TableInfo_INOUT>
+      <BASE_STATE />
+      <Mode>S</Mode>
+      <DBGbn>APP</DBGbn>
+      <ServiceName>WB</ServiceName>
+      <GROUP>영상</GROUP>
+      <TABLE_NAME>MSERMRRD</TABLE_NAME>
+      <TABLE_COMMENTS>환자검사실예약정보</TABLE_COMMENTS>
+      <SEQ>0</SEQ>
+      <OWNER>HSUP</OWNER>
+      <SCRN_MRK_SEQ>0</SCRN_MRK_SEQ>
+      <COLUMN_POSITION>0</COLUMN_POSITION>
+    </TableInfo_INOUT>
+    <TableInfo_INOUT>
+      <BASE_STATE />
+      <GROUP>영상</GROUP>
+      <TABLE_NAME>MSERMDDD</TABLE_NAME>
+      <TABLE_COMMENTS>판독결과정보</TABLE_COMMENTS>
+      <SEQ>0</SEQ>
+      <OWNER>HSUP</OWNER>
+      <SCRN_MRK_SEQ>0</SCRN_MRK_SEQ>
+      <COLUMN_POSITION>0</COLUMN_POSITION>
+    </TableInfo_INOUT>
+    <TableInfo_INOUT>
+      <BASE_STATE />
+      <Mode>S</Mode>
+      <DBGbn>APP</DBGbn>
+      <ServiceName>WB</ServiceName>
+      <GROUP>영상</GROUP>
+      <TABLE_NAME>MSERMINF_ORR</TABLE_NAME>
+      <TABLE_COMMENTS />
+      <SEQ>0</SEQ>
+      <OWNER>HINF</OWNER>
+      <SCRN_MRK_SEQ>0</SCRN_MRK_SEQ>
+      <COLUMN_POSITION>0</COLUMN_POSITION>
+    </TableInfo_INOUT>
+    <TableInfo_INOUT>
+      <BASE_STATE />
+      <GROUP>영상</GROUP>
+      <TABLE_NAME>MSERMINF_ORU</TABLE_NAME>
+      <TABLE_COMMENTS>PACS, 팍스인터페이스ReportSend</TABLE_COMMENTS>
+      <SEQ>0</SEQ>
+      <OWNER>HINF</OWNER>
+      <SCRN_MRK_SEQ>0</SCRN_MRK_SEQ>
+      <COLUMN_POSITION>0</COLUMN_POSITION>
+    </TableInfo_INOUT>
+    <TableInfo_INOUT>
+      <BASE_STATE />
+      <GROUP>재활</GROUP>
+      <TABLE_NAME>MSTRHTCD</TABLE_NAME>
+      <TABLE_COMMENTS>재활치료실별치료코드정보</TABLE_COMMENTS>
+      <SEQ>0</SEQ>
+      <OWNER>HSUP</OWNER>
+      <SCRN_MRK_SEQ>0</SCRN_MRK_SEQ>
+      <COLUMN_POSITION>0</COLUMN_POSITION>
+    </TableInfo_INOUT>
+    <TableInfo_INOUT>
+      <BASE_STATE />
+      <GROUP>재활</GROUP>
+      <TABLE_NAME>MSTRHSRD</TABLE_NAME>
+      <TABLE_COMMENTS>치료실정보</TABLE_COMMENTS>
+      <SEQ>0</SEQ>
+      <OWNER>HSUP</OWNER>
+      <SCRN_MRK_SEQ>0</SCRN_MRK_SEQ>
+      <COLUMN_POSITION>0</COLUMN_POSITION>
+    </TableInfo_INOUT>
+    <TableInfo_INOUT>
+      <BASE_STATE />
+      <GROUP>처방</GROUP>
+      <TABLE_NAME>MOOORPTD</TABLE_NAME>
+      <TABLE_COMMENTS>환자처방통합정보</TABLE_COMMENTS>
+      <SEQ>0</SEQ>
+      <OWNER>HMED</OWNER>
+      <SCRN_MRK_SEQ>0</SCRN_MRK_SEQ>
+      <COLUMN_POSITION>0</COLUMN_POSITION>
+    </TableInfo_INOUT>
+    <TableInfo_INOUT>
+      <BASE_STATE />
+      <GROUP>수진</GROUP>
+      <TABLE_NAME>ACPPRAAM</TABLE_NAME>
+      <TABLE_COMMENTS>입원접수기본</TABLE_COMMENTS>
+      <SEQ>0</SEQ>
+      <OWNER>HBIL</OWNER>
+      <SCRN_MRK_SEQ>0</SCRN_MRK_SEQ>
+      <COLUMN_POSITION>0</COLUMN_POSITION>
+    </TableInfo_INOUT>
+    <TableInfo_INOUT>
+      <BASE_STATE />
+      <GROUP>수진</GROUP>
+      <TABLE_NAME>ACPPRODM</TABLE_NAME>
+      <TABLE_COMMENTS>외래예약접수기본</TABLE_COMMENTS>
+      <SEQ>0</SEQ>
+      <OWNER>HBIL</OWNER>
+      <SCRN_MRK_SEQ>0</SCRN_MRK_SEQ>
+      <COLUMN_POSITION>0</COLUMN_POSITION>
+    </TableInfo_INOUT>
+    <TableInfo_INOUT>
+      <BASE_STATE />
+      <GROUP>수진</GROUP>
+      <TABLE_NAME>ACPPRETM</TABLE_NAME>
+      <TABLE_COMMENTS>응급접수기본</TABLE_COMMENTS>
+      <SEQ>0</SEQ>
+      <OWNER>HBIL</OWNER>
+      <SCRN_MRK_SEQ>0</SCRN_MRK_SEQ>
+      <COLUMN_POSITION>0</COLUMN_POSITION>
+    </TableInfo_INOUT>
+    <TableInfo_INOUT>
+      <BASE_STATE />
+      <GROUP>수진</GROUP>
+      <TABLE_NAME>ACPPRORE</TABLE_NAME>
+      <TABLE_COMMENTS>외래예약유형상세</TABLE_COMMENTS>
+      <SEQ>0</SEQ>
+      <OWNER>HBIL</OWNER>
+      <SCRN_MRK_SEQ>0</SCRN_MRK_SEQ>
+      <COLUMN_POSITION>0</COLUMN_POSITION>
+    </TableInfo_INOUT>
+  </FAV_TABLE>
+  <CATEGORY>
+    <Category_INOUT>
+      <BASE_STATE />
+      <CATEGORY>PL/SQL 및 DB</CATEGORY>
+      <OLD_CATEGORY>PL/SQL</OLD_CATEGORY>
+    </Category_INOUT>
+    <Category_INOUT>
+      <BASE_STATE />
+      <CATEGORY>Query</CATEGORY>
+    </Category_INOUT>
+    <Category_INOUT>
+      <BASE_STATE />
+      <CATEGORY>기타</CATEGORY>
+    </Category_INOUT>
+    <Category_INOUT>
+      <BASE_STATE />
+      <CATEGORY>Xaml</CATEGORY>
+    </Category_INOUT>
+    <Category_INOUT>
+      <BASE_STATE />
+      <CATEGORY>C#</CATEGORY>
+    </Category_INOUT>
+    <Category_INOUT>
+      <BASE_STATE />
+      <CATEGORY>오라클</CATEGORY>
+    </Category_INOUT>
+    <Category_INOUT>
+      <BASE_STATE />
+      <CATEGORY>Script</CATEGORY>
+    </Category_INOUT>
+    <Category_INOUT>
+      <BASE_STATE />
+      <CATEGORY>코로나</CATEGORY>
+    </Category_INOUT>
+    <Category_INOUT>
+      <BASE_STATE />
+      <CATEGORY>감염</CATEGORY>
+    </Category_INOUT>
+    <Category_INOUT>
+      <BASE_STATE />
+      <CATEGORY>재활</CATEGORY>
+    </Category_INOUT>
+    <Category_INOUT>
+      <BASE_STATE />
+      <CATEGORY>재료</CATEGORY>
+    </Category_INOUT>
+    <Category_INOUT>
+      <BASE_STATE />
+      <CATEGORY>ERROR</CATEGORY>
+    </Category_INOUT>
+    <Category_INOUT>
+      <BASE_STATE />
+      <CATEGORY>영상/과내</CATEGORY>
+      <OLD_CATEGORY>영상과내</OLD_CATEGORY>
+    </Category_INOUT>
+    <Category_INOUT>
+      <BASE_STATE />
+      <CATEGORY>수가</CATEGORY>
+    </Category_INOUT>
+    <Category_INOUT>
+      <BASE_STATE />
+      <CATEGORY>정규식</CATEGORY>
+    </Category_INOUT>
+    <Category_INOUT>
+      <BASE_STATE />
+      <CATEGORY>심사</CATEGORY>
+    </Category_INOUT>
+    <Category_INOUT>
+      <BASE_STATE />
+      <CATEGORY>전자동의서</CATEGORY>
+    </Category_INOUT>
+    <Category_INOUT>
+      <BASE_STATE />
+      <CATEGORY>Converter</CATEGORY>
+    </Category_INOUT>
+    <Category_INOUT>
+      <BASE_STATE />
+      <CATEGORY>EAM</CATEGORY>
+    </Category_INOUT>
+    <Category_INOUT>
+      <BASE_STATE />
+      <CATEGORY>EQS</CATEGORY>
+    </Category_INOUT>
+    <Category_INOUT>
+      <BASE_STATE />
+      <CATEGORY>Excel</CATEGORY>
+    </Category_INOUT>
+    <Category_INOUT>
+      <BASE_STATE />
+      <CATEGORY>재활 문의</CATEGORY>
+    </Category_INOUT>
+    <Category_INOUT>
+      <BASE_STATE />
+      <CATEGORY>인수인계(영상)</CATEGORY>
+    </Category_INOUT>
+  </CATEGORY>
+  <TABLE_CATEGORY />
+  <CHK_SC_STOP>N</CHK_SC_STOP>
+  <CHK_CELL_UNIT>Y</CHK_CELL_UNIT>
+  <HSP_TP_CD>01</HSP_TP_CD>
+  <STF_NO>SSSUP11</STF_NO>
+  <DB_INFO>PROD</DB_INFO>
+  <SYNC>Y</SYNC>
+  <MY_MEMO>GUBUN
+PACT_TP_NM
+WHOLE_SUM --처방명수(TOTAL)
+ROOM_SUM --처방건수(TOTAL)
+CNT	-GUBUN 처방명수
+SUMCNT	--GUBUN 처방건수</MY_MEMO>
+  <BAK_PATH>D:\전남대SI\WB.MyQuery</BAK_PATH>
+  <BAK_INTERVAL>60</BAK_INTERVAL>
+  <AUTO_BACKUP_YN>Y</AUTO_BACKUP_YN>
+</UserInfo_INOUT>

@@ -1,0 +1,218 @@
+﻿<uc:UCBase   xmlns:uc="clr-namespace:WB.UC"
+             x:Class="WB.EAMMenuInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"  
+             xmlns:b="clr-namespace:WB.Common"
+             xmlns:local="clr-namespace:WB"             
+             mc:Ignorable="d" 
+             d:DesignHeight="850" d:DesignWidth="1500">
+    <uc:UCBase.DataContext>
+        <local:EAMMenuInfoData/>
+    </uc:UCBase.DataContext>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="RECOURCE_DICTIONARY/ResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <b:BindingProxy x:Key="proxy" DataContext="{Binding}"/>
+            <b:RadioConverter x:Key="radioConv"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Background="{StaticResource SearchAreaAliceBorderBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="LightGray" BorderThickness="1,1,1,1" Background="{StaticResource LightAreaBorderBrush}">
+            <DockPanel LastChildFill="False">
+                <TextBlock Text="검색어" Style="{StaticResource DefaultTextBlock}"/>
+                <TextBox x:Name="searchText" Style="{StaticResource DefaultTextBox}" Width="300" Text="{Binding SERACH_MENU_TEXT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="0,6,0,6" KeyDown="TextBox_KeyDown" AcceptsReturn="False" TextChanged="searchText_TextChanged"/>
+
+                <TextBlock Text="ID" Style="{StaticResource DefaultTextBlock}"/>
+                <TextBox x:Name="txtStfNo"  CharacterCasing="Upper" Style="{StaticResource DefaultTextBox}" Width="80" Text="{Binding USER_ID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="0,6,0,6"  AcceptsReturn="False" InputMethod.PreferredImeState="On" InputMethod.PreferredImeConversionMode="Alphanumeric">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="LostFocus">
+                            <i:InvokeCommandAction Command="{Binding LostFocusCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+
+                <TextBlock Text="등록번호" Style="{StaticResource DefaultTextBlock}"/>
+                <TextBox Style="{StaticResource DefaultTextBox}" Width="80" Text="{Binding PT_NO, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="0,6,0,6"  MaxLength="8" AcceptsReturn="False" InputMethod.PreferredImeState="On" InputMethod.PreferredImeConversionMode="Alphanumeric"/>
+
+                <Border BorderBrush="Black" BorderThickness="1,0,0,0" Margin="5,0,0,0">
+                    <TextBlock Text="DB:" Style="{StaticResource DefaultTextBlock}" Margin="5,0,0,2"/>
+                </Border>
+                <RadioButton Content="DEV" Style="{StaticResource DefaultRadioButton}" IsChecked="{Binding SEL_DB_GUBN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource radioConv}, ConverterParameter='DEV'}" Command="{Binding DB_SAVECommand}" GroupName="rdoDB"/>
+                <RadioButton Content="STG" Style="{StaticResource DefaultRadioButton}" IsChecked="{Binding SEL_DB_GUBN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource radioConv}, ConverterParameter='STG'}" Command="{Binding DB_SAVECommand}" GroupName="rdoDB"/>
+                <RadioButton Content="PROD" Style="{StaticResource DefaultRadioButton}" IsChecked="{Binding SEL_DB_GUBN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource radioConv}, ConverterParameter='PROD'}" Command="{Binding DB_SAVECommand}" GroupName="rdoDB"/>
+
+                <Border BorderBrush="Black" BorderThickness="1,0,0,0" Margin="5,0,0,0">
+                    <TextBlock Text="병원구분:" Style="{StaticResource DefaultTextBlock}" Margin="5,0,0,2"/>
+                </Border>
+                <RadioButton Content="01" Style="{StaticResource DefaultRadioButton}" IsChecked="{Binding SEL_HSP_TP_CD_RADIO, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource radioConv}, ConverterParameter='01'}" Command="{Binding DB_SAVECommand}" GroupName="rdoHspTpCd"/>
+                <RadioButton Content="02" Style="{StaticResource DefaultRadioButton}" IsChecked="{Binding SEL_HSP_TP_CD_RADIO, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource radioConv}, ConverterParameter='02'}" Command="{Binding DB_SAVECommand}" GroupName="rdoHspTpCd"/>
+                <RadioButton Content="03" Style="{StaticResource DefaultRadioButton}" IsChecked="{Binding SEL_HSP_TP_CD_RADIO, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource radioConv}, ConverterParameter='03'}" Command="{Binding DB_SAVECommand}" GroupName="rdoHspTpCd"/>
+                <RadioButton Content="04" Style="{StaticResource DefaultRadioButton}" IsChecked="{Binding SEL_HSP_TP_CD_RADIO, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource radioConv}, ConverterParameter='04'}" Command="{Binding DB_SAVECommand}" GroupName="rdoHspTpCd"/>
+                <Border BorderBrush="Black" BorderThickness="1,0,0,0" Margin="5,0,0,0">
+                    <Button Content="CONNECT" VerticalAlignment="Center" Margin="10,0,0,0" Width="130" Style="{StaticResource btnDefault}" FontSize="22"  Command="{Binding HISCONNECTCommand}"/>
+                </Border>
+            </DockPanel>
+        </Border>
+        <Grid x:Name="grdMain" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.7*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="0.4*"/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Border>
+                    <DataGrid x:Name="dgrdEamMenu" Grid.Row="0" Margin="0,5,0,0" HeadersVisibility="All"  SelectionMode="Extended" CanUserAddRows="False" SelectionUnit="Cell" 
+                  CanUserSortColumns="True" VerticalGridLinesBrush="{StaticResource LightAreaBorderBrush}" HorizontalGridLinesBrush="{StaticResource LightAreaBorderBrush}"
+                 ItemsSource="{Binding EAMMENUINFO_LIST}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseUp">
+                                <i:InvokeCommandAction Command="{Binding DgrdSelectionChangedCommand}" CommandParameter="{Binding ElementName=dgrdEamMenu}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <!--컬럼 시작-->
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="BUSINESS_TYP" Width="80" Binding="{Binding BUSINESS_TYP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="MENU__CD" Width="Auto" Binding="{Binding MENU_CD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="메뉴명" Width="Auto" Binding="{Binding MENU_NM, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="ASSEMBLY__NM" Width="Auto" Binding="{Binding ASSEMBLY_NM, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="APP__URL" Width="Auto" Binding="{Binding APP_URL, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="사용여부" Width="80" Binding="{Binding USE_YN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="FOLDER__YN" Width="80" Binding="{Binding FOLDER_YN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="ICON__URI" Width="80" Binding="{Binding ICON_URI, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="DUP__YN" Width="80" Binding="{Binding DUP_YN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="UP__MENU__CD" Width="80" Binding="{Binding UP_MENU_CD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="BIZ__MENU_ID" Width="80" Binding="{Binding BIZ_MENU_ID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="MENU__ID" Width="Auto" Binding="{Binding MENU_ID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="정렬순번" Width="80" Binding="{Binding SORT_SEQ, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="MENU__TYPE" Width="80" Binding="{Binding MENU_TYPE, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="MENU__OPEN__TYPE" Width="80" Binding="{Binding MENU_OPEN_TYPE, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="DR__OPEN__TYPE" Width="80" Binding="{Binding DR_OPEN_TYPE, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="NR__OPEN__TYPE" Width="80" Binding="{Binding NR_OPEN_TYPE, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="MS__OPEN__TYPE" Width="80" Binding="{Binding MS_OPEN_TYPE, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="PA__OPEN__TYPE" Width="80" Binding="{Binding PA_OPEN_TYPE, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="RP__OPEN__TYPE" Width="80" Binding="{Binding RP_OPEN_TYPE, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="MODAL_YN" Width="80" Binding="{Binding MODAL_YN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="WIN_VAL" Width="80" Binding="{Binding WIN_VAL, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="TILE_FULL_SIZE_YN" Width="80" Binding="{Binding TILE_FULL_SIZE_YN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="TILE_DEFAULT_SIZE" Width="80" Binding="{Binding TILE_DEFAULT_SIZE, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="TILE_MAX_SIZE" Width="80" Binding="{Binding TILE_MAX_SIZE, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="TILE_MIN_SIZE" Width="80" Binding="{Binding TILE_MIN_SIZE, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="SEARCH_DEFAULT_DURATION" Width="80" Binding="{Binding SEARCH_DEFAULT_DURATION, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="SEARCH_MAX_DURATION" Width="80" Binding="{Binding SEARCH_MAX_DURATION, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="PATIENT_INFO_YN" Width="80" Binding="{Binding PATIENT_INFO_YN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="PRIVATE_INFO_YN" Width="80" Binding="{Binding PRIVATE_INFO_YN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="MEDICAL_RECORD_YN" Width="80" Binding="{Binding MEDICAL_RECORD_YN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="ELECTRONIC_SIGNATURE_YN" Width="80" Binding="{Binding ELECTRONIC_SIGNATURE_YN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="DISP_YN" Width="80" Binding="{Binding DISP_YN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="ACTIVE_YN" Width="80" Binding="{Binding ACTIVE_YN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="APPROVE_YN" Width="80" Binding="{Binding APPROVE_YN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="SYS_CD" Width="80" Binding="{Binding SYS_CD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="사용시작일시" Width="80" Binding="{Binding USE_STR_DTM, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="사용종료일시" Width="80" Binding="{Binding USE_END_DTM, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="POPUP_ONLY_YN" Width="80" Binding="{Binding POPUP_ONLY_YN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="퀵메뉴여부" Width="80" Binding="{Binding QCK_MENU_YN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="REPORT_YN" Width="80" Binding="{Binding REPORT_YN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="AUTH_CHECK_YN" Width="80" Binding="{Binding AUTH_CHECK_YN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="TITLE_DISP_YN" Width="80" Binding="{Binding TITLE_DISP_YN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="PT_INFO_NEED_TYPE" Width="80" Binding="{Binding PT_INFO_NEED_TYPE, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="SCALE_DISP_YN" Width="80" Binding="{Binding SCALE_DISP_YN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="한글파일명" Width="80" Binding="{Binding KOR_FILE_NM, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="OGCP_FILE_PATH" Width="80" Binding="{Binding OGCP_FILE_PATH, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="EMPL_FILE_PATH" Width="80" Binding="{Binding EMPL_FILE_PATH, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="파일길이" Width="80" Binding="{Binding FILE_LTH, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="REPEAT_SHOW_HIDE" Width="80" Binding="{Binding REPEAT_SHOW_HIDE, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="REPEAT_YEAR_MONTH" Width="80" Binding="{Binding REPEAT_YEAR_MONTH, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="REPEAT_START" Width="80" Binding="{Binding REPEAT_START, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="REPEAT_END" Width="80" Binding="{Binding REPEAT_END, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="PAGE_USAGE_RMKS" Width="80" Binding="{Binding PAGE_USAGE_RMKS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="AGGR_EXCEPT_YN" Width="80" Binding="{Binding AGGR_EXCEPT_YN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="DEPLOY_START_DTM" Width="80" Binding="{Binding DEPLOY_START_DTM, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="MENU_DESC" Width="80" Binding="{Binding MENU_DESC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                        </DataGrid.Columns>
+                        <!--컬럼 끝-->
+                    </DataGrid>
+                </Border>
+                <Border Grid.Row="1" Background="{StaticResource LightAreaBorderBrush}" BorderBrush="Black" BorderThickness="1,1,1,1">
+                    <DockPanel LastChildFill="False">
+                        <Button Content ="즐겨찾기 등록" DockPanel.Dock="Right" Style="{StaticResource SearchButton}" Background="{StaticResource SearchAreaBackground}" Margin="0,0,10,0" Command="{Binding FavEamSaveCommand}" CommandParameter="{Binding ElementName=dgrdEamMenu}"/>
+                    </DockPanel>
+                </Border>
+            </Grid>
+            <GridSplitter Grid.Column="1" Grid.Row="1" Style="{StaticResource VerGridSplitter}" PreviewMouseDoubleClick="GridSplitter_MouseDoubleClick" Margin="2,0,2,0"/>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Background="{StaticResource LightAreaBorderBrush}" BorderBrush="Black" BorderThickness="1,1,1,1">
+                    <DockPanel LastChildFill="False">
+                        <TextBlock Style="{StaticResource DefaultTextBlock}" Text="검색어 "/>
+                        <TextBox x:Name="txtSearch2" Style="{StaticResource DefaultTextBoxV2}" Width="200" VerticalAlignment="Center" Padding="0,2,0,2" b:TextBoxBehavior.BindingExpreesion="True" Text="{Binding MENU_SEARCH_TEXT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" AcceptsReturn="False">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding ReFreshCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
+                    </DockPanel>
+                </Border>
+                <Border Grid.Row="1">
+                    <DataGrid x:Name="dgrdFavEamMenu" Grid.Row="0" Margin="0,5,0,0" HeadersVisibility="All"  SelectionMode="Extended" CanUserAddRows="False" AutoGenerateColumns="False"
+                  CanUserSortColumns="True" VerticalGridLinesBrush="{StaticResource LightAreaBorderBrush}" HorizontalGridLinesBrush="{StaticResource LightAreaBorderBrush}"
+                 ItemsSource="{Binding USERINFO.FAVEAMINFO_LIST}" SelectionUnit="Cell">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseUp">
+                                <i:InvokeCommandAction Command="{Binding DgrdSelectionChangedCommand}" CommandParameter="{Binding ElementName=dgrdFavEamMenu}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <DataGrid.RowStyle>
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="Foreground" Value="Black" />
+                                <Setter Property="Background" Value="White" />
+                            </Style>
+                        </DataGrid.RowStyle>
+                        <DataGrid.GroupStyle>
+                            <GroupStyle ContainerStyle="{StaticResource ResourceKey=groupStyleBlue}">
+                                <GroupStyle.Panel>
+                                    <ItemsPanelTemplate>
+                                        <DataGridRowsPresenter/>
+                                    </ItemsPanelTemplate>
+                                </GroupStyle.Panel>
+                            </GroupStyle>
+                        </DataGrid.GroupStyle>
+                        <!--컬럼 시작-->
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ABBR__NM" Width="Auto" Binding="{Binding ABBR_NM, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="MENU__CD" Width="100" Binding="{Binding MENU_CD, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="MENU__NM" Width="Auto" Binding="{Binding MENU_NM, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="ASSEMBLY__NM" Width="Auto" Binding="{Binding ASSEMBLY_NM, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                            <DataGridTextColumn Header="APP__URL" Width="*" Binding="{Binding APP_URL, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  />
+                        </DataGrid.Columns>
+                        <!--컬럼 끝-->
+                    </DataGrid>
+
+                </Border>
+                <Border Grid.Row="2" Background="{StaticResource LightAreaBorderBrush}" BorderBrush="Black" BorderThickness="1,1,1,1">
+                    <DockPanel LastChildFill="False">
+                        <Button Content ="저장" DockPanel.Dock="Right" Style="{StaticResource SearchButton}" Background="{StaticResource SearchAreaBackground}" Margin="0,0,10,0" Command="{Binding FavSaveCommand}" CommandParameter="{Binding ElementName=dgrdFavEamMenu}"/>
+                        <Button Content ="즐겨찾기 해제" DockPanel.Dock="Right" Style="{StaticResource SearchButton}" Background="{StaticResource SearchAreaBackground}" Margin="0,0,10,0" Command="{Binding FavEamDeleteCommand}" CommandParameter="{Binding ElementName=dgrdFavEamMenu}"/>
+                    </DockPanel>
+                </Border>
+            </Grid>
+        </Grid>
+    </Grid>
+</uc:UCBase>

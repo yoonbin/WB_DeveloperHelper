@@ -1,0 +1,650 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sqlMap
+    namespace="Ibatis"
+    xmlns="http://ibatis.apache.org/mapping"
+    xmlns:xls="http://www.w3.org/2001/XMLSchema-instance">
+	<statements>
+		<select id="MetaDL.GetMetaData" resultClass="WB.Meta_INOUT" parameterclass="WB.Meta_INOUT">
+			<![CDATA[ 
+
+SELECT C.CD_NM GBN
+      ,B.CD_NM GBN_DTL
+      ,DIC_LOG_NM
+      ,DIC_PHY_NM
+      ,A.DIC_PHY_FLL_NM
+      ,DIC_DESC
+      ,A.DATA_TYPE
+      ,A.STANDARD_YN
+      ,(SELECT B.CD_NM GBN_DTL
+          FROM STD_DOM X
+              ,DA_CODE B
+              ,MS_CODE C
+         WHERE 1=1
+           AND X.DOM_ID = A.DOM_ID
+           AND X.DOM_TYPE_CD = B.CD_ID
+           AND B.UP_CD_ID = C.CD_ID
+           AND C.UP_CD_ID = 'ROOT'
+           AND B.UP_CD_ID = '6022'
+           AND SYSDATE BETWEEN TO_DATE(AVAL_ST_DT, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(AVAL_END_DT,'YYYY-MM-DD HH24:MI:SS')) DOM_GRP_NM
+    FROM STD_DIC A
+        ,DA_CODE B
+        ,MS_CODE C
+WHERE 1=1
+AND DIC_PHY_NM IN
+(
+SELECT TRIM(REGEXP_SUBSTR(#TEXT#,'[^'||','||']+',1,LEVEL)) AS TXT
+  FROM DUAL
+CONNECT BY INSTR(#TEXT#,',',1,LEVEL-1)>0
+)
+AND A.DIC_GBN_CD = B.CD_ID
+AND B.UP_CD_ID = C.CD_ID
+AND C.UP_CD_ID = 'ROOT'
+AND B.UP_CD_ID = '6019'
+AND SYSDATE BETWEEN TO_DATE(AVAL_ST_DT, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(AVAL_END_DT,'YYYY-MM-DD HH24:MI:SS')
+UNION ALL
+SELECT C.CD_NM GBN
+      ,B.CD_NM GBN_DTL
+      ,DIC_LOG_NM
+      ,DIC_PHY_NM
+      ,A.DIC_PHY_FLL_NM
+      ,DIC_DESC
+      ,A.DATA_TYPE
+      ,A.STANDARD_YN
+      ,(SELECT B.CD_NM GBN_DTL
+          FROM STD_DOM X
+              ,DA_CODE B
+              ,MS_CODE C
+         WHERE 1=1
+           AND X.DOM_ID = A.DOM_ID
+           AND X.DOM_TYPE_CD = B.CD_ID
+           AND B.UP_CD_ID = C.CD_ID
+           AND C.UP_CD_ID = 'ROOT'
+           AND B.UP_CD_ID = '6022'
+           AND SYSDATE BETWEEN TO_DATE(AVAL_ST_DT, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(AVAL_END_DT,'YYYY-MM-DD HH24:MI:SS')) DOM_GRP_NM
+    FROM STD_DIC A
+        ,DA_CODE B
+        ,MS_CODE C
+WHERE 1=1
+AND DIC_LOG_NM IN
+(
+SELECT TRIM(REGEXP_SUBSTR(#TEXT#,'[^'||','||']+',1,LEVEL)) AS TXT
+  FROM DUAL
+CONNECT BY INSTR(#TEXT#,',',1,LEVEL-1)>0
+)
+AND A.DIC_GBN_CD = B.CD_ID
+AND B.UP_CD_ID = C.CD_ID
+AND C.UP_CD_ID = 'ROOT'
+AND B.UP_CD_ID = '6019'
+AND SYSDATE BETWEEN TO_DATE(AVAL_ST_DT, 'YYYY-MM-DD HH24:MI:SS') AND TO_DATE(AVAL_END_DT,'YYYY-MM-DD HH24:MI:SS')
+
+            
+            
+      ]]>
+		</select>
+	</statements>
+	<statements>
+		<select id="MetaDL.GetTableData" resultClass="WB.TableInfo_INOUT" parameterclass="WB.TableInfo_INOUT">
+			<![CDATA[ 
+
+            SELECT A.TABLE_NAME
+                 , D.COMMENTS TABLE_COMMENTS
+                 , A.COLUMN_ID SEQ
+                 , DECODE(C.INDEX_NAME, '', '', 'PK') KEY_FIELD
+                 , A.COLUMN_NAME
+                 , DECODE(A.DATA_TYPE, 'VARCHAR2', A.DATA_TYPE||'('||A.DATA_LENGTH||')'
+                                     , 'DATE', A.DATA_TYPE
+                                     , 'NUMBER', A.DATA_TYPE||'('||A.DATA_PRECISION||DECODE(A.DATA_SCALE, '0', '', ','||A.DATA_SCALE)||')'
+                                     , A.DATA_TYPE
+                                     ) DATA_TYPE
+                 , DECODE(A.NULLABLE, 'N', 'NOT NULL', 'Y', 'NULL') NULLABLE
+                 , B.COMMENTS     
+                 , A.OWNER
+            FROM   ALL_TAB_COLUMNS A
+                 , ALL_COL_COMMENTS B
+                 , ALL_IND_COLUMNS C
+                 , ALL_TAB_COMMENTS D
+            WHERE  C.TABLE_OWNER(+) <> 'KVDBA'
+            AND    A.OWNER = B.OWNER
+            AND    A.OWNER = D.OWNER            
+            AND    A.TABLE_NAME = D.TABLE_NAME
+            AND    A.TABLE_NAME = B.TABLE_NAME
+            AND    A.COLUMN_NAME = B.COLUMN_NAME
+            AND    A.TABLE_NAME = C.TABLE_NAME(+)
+            AND    A.COLUMN_NAME = C.COLUMN_NAME(+)
+            AND    C.INDEX_NAME(+) LIKE '%PK'
+            AND    A.TABLE_NAME like UPPER('' || #TABLE_NAME# ||'')
+
+            ORDER BY TABLE_NAME,SEQ, COLUMN_NAME, A.COLUMN_ID
+
+
+            
+            
+      ]]>
+		</select>
+	</statements>
+
+	<resultMaps>
+		<resultMap id="rmALL_SOURCE" class="WB.ALL_SOURCE">
+			<result property="OWNER" column="OWNER" />
+			<result property="NAME" column="NAME" />
+			<result property="TYPE" column="TYPE" />
+			<result property="LINE" column="LINE" />
+			<result property="TEXT" column="TEXT" />
+		</resultMap>
+	</resultMaps>
+	<statements>
+		<select id="WB.SELECT.ALL_SOURCE.S02"  resultMap="rmALL_SOURCE" parameterclass="WB.ALL_SOURCE">
+			<![CDATA[ 
+
+       SELECT OWNER
+            , NAME
+            , TYPE
+            , LINE
+            , TEXT
+         FROM ALL_SOURCE
+        WHERE NAME = UPPER(#NAME#)
+		  AND TYPE NOT IN ('PACKAGE') /*PACKAGE HEADER는 제외*/
+		ORDER BY LINE 
+       ]]>
+		</select>
+	</statements>
+
+	<resultMaps>
+		<resultMap id="rmALL_VIEWS" class="WB.ALL_VIEWS">
+			<result property="COL_INFO" column="COL_INFO" />
+			<result property="TEXT" column="TEXT" />
+		</resultMap>
+	</resultMaps>
+	<statements>
+		<select id="WB.SELECT.ALL_VIEWS.S01"  resultMap="rmALL_VIEWS" parameterclass="WB.ALL_VIEWS">
+			<![CDATA[ 
+
+        SELECT (SELECT RTRIM(XMLAGG ( XMLELEMENT(A, COLUMN_NAME || ', ') ORDER BY A.COLUMN_ID).EXTRACT('//text()'), ', ') COL_INFO
+                  FROM ALL_TAB_COLUMNS A
+                 WHERE TABLE_NAME = #NAME#) COL_INFO
+             , TEXT
+          FROM ALL_VIEWS
+         WHERE VIEW_NAME = #NAME#
+       ]]>
+		</select>
+	</statements>
+	
+	<statements>
+		<select id="WB.SELECT.GetTableRefObj" resultClass="WB.TableInfo_INOUT" parameterclass="WB.TableInfo_INOUT">
+			<![CDATA[ 
+
+              select distinct a.owner OWNER
+                   , a.name    OBJ_NAME
+                   , a.type    OBJ_TYPE
+                   , b.status  STATUS 
+                from all_dependencies a
+                    ,all_objects b
+                where b.object_name = a.name
+                  and a.referenced_name = upper(#TABLE_NAME#)
+                  and a.owner = b.owner
+                  and a.type = b.object_type
+                union all
+                select a.owner        OWNER
+                     , a.trigger_name OBJ_NAME
+                     , 'TRIGGER'      OBJ_TYPE
+                     , a.status       STATUS
+                 from all_triggers a
+                     ,all_tables   b
+                 where b.table_name = upper(#TABLE_NAME#)
+                   and a.table_name = b.table_name
+                   and a.owner      = b.owner
+                order by  owner, obj_name
+      ]]>
+		</select>
+	</statements>
+	<statements>
+		<select id="MetaDL.GetAllTable" resultClass="WB.TableInfo_INOUT">
+			<![CDATA[ 
+
+SELECT A.TABLE_NAME
+      ,D.COMMENTS       TABLE_COMMENTS
+	  ,A.OWNER
+FROM   ALL_TAB_COLUMNS A
+     , ALL_TAB_COMMENTS D
+WHERE 1=1
+AND    A.OWNER = D.OWNER
+AND    A.TABLE_NAME = D.TABLE_NAME
+GROUP BY A.OWNER,A.TABLE_NAME,D.COMMENTS
+ORDER BY decode(a.owner, 'HSUP', 0, 'XSUP', 1
+                        , 'HMED', 2, 'XMED', 3
+                        , 'HCOM', 4, 'XCOM', 5
+                        , 'HBIL', 6, 'XBIL', 7
+                        ,  10),TABLE_NAME
+
+            
+            
+      ]]>
+		</select>
+	</statements>
+
+	<statements>
+		<select id="MetaDL.GetAllTable2"  resultClass="WB.TableInfo_INOUT">
+			<![CDATA[ 
+
+select a.owner                         OWNER
+     , a.table_name                    TABLE_NAME
+     , nvl(b.comments, ' ')            TABLE_COMMENTS
+     , 0 CREATED_DAYS
+     , 0 MODIFY_DAYS
+  from all_tables a
+     , all_tab_comments b
+ where a.table_name = b.table_name
+ and a.owner = b.owner
+ and b.table_type = 'TABLE'
+ AND A.owner not in ('SYS', 'ORDDATA', 'ORDSYS', 'OWBSYS', 'SYSTEM', 'WMSYS')
+ order by decode(a.owner, 'HSUP', 0, 'XSUP', 1
+                        , 'HMED', 2, 'XMED', 3
+                        , 'HCOM', 4, 'XCOM', 5
+                        , 'HBIL', 6, 'XBIL', 7
+                        ,  10)
+        , a.table_name
+
+            
+            
+      ]]>
+		</select>
+	</statements>
+
+	<statements>
+		<select id="WB.SELECT.FXQUERYSTORE.S01" resultClass="WB.FXQUERYSTORE" parameterclass="WB.FXQUERYSTORE">
+			<![CDATA[ 
+
+        SELECT QUERYTEXT
+          FROM FXQUERYSTORE
+         WHERE UPPER(QUERYID) = UPPER(#QUERY_ID#)
+ 
+            
+      ]]>
+		</select>
+	</statements>
+
+	<statements>
+		<select id="WB.SELECT.SelectTableIndex" resultClass="WB.TableInfo_INOUT" parameterclass="WB.TableInfo_INOUT">
+			<![CDATA[ 
+                    SELECT A.INDEX_NAME    AS "INDEX_NAME"
+                          ,A.COLUMN_NAME   AS "COLUMN"
+                          ,B.COMMENTS      AS "COMMENT"
+						  ,A.COLUMN_POSITION
+                     FROM ALL_IND_COLUMNS A
+                        , ALL_COL_COMMENTS B
+                     WHERE A.TABLE_NAME = #TABLE_NAME#
+                       AND A.TABLE_NAME = B.TABLE_NAME
+                       AND A.COLUMN_NAME = B.COLUMN_NAME
+                     ORDER BY A.INDEX_NAME, A.COLUMN_POSITION
+            
+                ]]>
+		</select>
+	</statements>
+	<statements>
+		<select id="WB.SELECT.SelectComnCd"  resultClass="WB.TableInfo_INOUT" parameterclass="WB.TableInfo_INOUT">
+			<![CDATA[
+        SELECT  '' HSP_TP_CD
+              , COMN_GRP_CD          /*공통그룹코드*/
+              , COMN_CD              /*공통코드*/
+              , COMN_CD_NM           /*공통코드명*/
+              , COMN_CD_EXPL         /*공통코드설명*/
+              , NVL(SCRN_MRK_SEQ, 999) SCRN_MRK_SEQ        /*화면표시순번*/
+              , USE_YN               /*사용여부*/
+              , DTRL1_NM             /*1번째업무규칙명*/
+              , DTRL2_NM             /*2번째업무규칙명*/
+              , DTRL3_NM             /*3번째업무규칙명*/
+              , DTRL4_NM             /*4번째업무규칙명*/
+              , DTRL5_NM             /*5번째업무규칙명*/
+              , DTRL6_NM             /*6번째업무규칙명*/
+              , NEXTG_FMR_COMN_CD    /**/
+          FROM CCCCCSTE
+          WHERE 1=1
+		    AND COMN_GRP_CD = #COMN_GRP_CD#
+		UNION ALL
+		
+		SELECT  HSP_TP_CD
+              , COMN_GRP_CD          /*공통그룹코드*/
+              , COMN_CD              /*공통코드*/
+              , COMN_CD_NM           /*공통코드명*/
+              , COMN_CD_EXPL         /*공통코드설명*/
+              , NVL(SCRN_MRK_SEQ, 999) SCRN_MRK_SEQ        /*화면표시순번*/
+              , USE_YN               /*사용여부*/
+              , DTRL1_NM             /*1번째업무규칙명*/
+              , DTRL2_NM             /*2번째업무규칙명*/
+              , DTRL3_NM             /*3번째업무규칙명*/
+              , DTRL4_NM             /*4번째업무규칙명*/
+              , DTRL5_NM             /*5번째업무규칙명*/
+              , DTRL6_NM             /*6번째업무규칙명*/
+              , NEXTG_FMR_COMN_CD    /**/
+          FROM CCCMCSTE
+          WHERE 1=1
+			AND COMN_GRP_CD = #COMN_GRP_CD#
+			
+          ORDER BY SCRN_MRK_SEQ, COMN_CD_NM
+      ]]>
+		</select>
+	</statements>
+	<statements>
+		<select id="WB.SelectCommonCode.SelectCCCCCLTC"  resultClass="WB.DTO.SelectCommonCode_INOUT" parameterclass="WB.DTO.SelectCommonCode_INOUT">
+			<![CDATA[
+SELECT 'CCCCCSTE' TABLE_NM
+                 , COMN_GRP_CD          /*공통그룹코드*/
+                 , COMN_GRP_CD_NM       /*공통그룹코드명*/
+              FROM CCCCCLTC
+             WHERE COMN_GRP_CD = #COMN_GRP_CD#
+                OR COMN_GRP_CD_NM LIKE '%' || #COMN_GRP_CD# || '%'
+
+            UNION ALL
+
+            SELECT 'CCCMCSTE' TABLE_NM
+                 , COMN_GRP_CD          /*공통그룹코드*/
+                 , COMN_GRP_CD_NM       /*공통그룹코드명*/
+              FROM CCCMCLTC
+             WHERE HSP_TP_CD  IN (SELECT TRIM(REGEXP_SUBSTR(#IN_HSP_TP_CD#,'[^'||','||']+',1,LEVEL)) AS TXT
+                                FROM DUAL
+                             CONNECT BY INSTR(#IN_HSP_TP_CD#,',',1,LEVEL-1)>0
+                                 )
+			   AND (COMN_GRP_CD = #COMN_GRP_CD# OR COMN_GRP_CD_NM LIKE '%' || #COMN_GRP_CD# || '%')
+
+          ORDER BY TABLE_NM, COMN_GRP_CD_NM
+
+      ]]>
+		</select>
+	</statements>
+
+	<statements>
+		<select id="WB.SelectCommonCode.SelectCCCCCSTE"  resultClass="WB.DTO.SelectCommonCode_INOUT" parameterclass="WB.DTO.SelectCommonCode_INOUT">
+			<![CDATA[
+        SELECT  '' HSP_TP_CD
+              , COMN_GRP_CD          /*공통그룹코드*/
+              , COMN_CD              /*공통코드*/
+              , COMN_CD_NM           /*공통코드명*/
+              , COMN_CD_EXPL         /*공통코드설명*/
+              , NVL(SCRN_MRK_SEQ, 999) SCRN_MRK_SEQ        /*화면표시순번*/
+              , USE_YN               /*사용여부*/
+              , DTRL1_NM             /*1번째업무규칙명*/
+              , DTRL2_NM             /*2번째업무규칙명*/
+              , DTRL3_NM             /*3번째업무규칙명*/
+              , DTRL4_NM             /*4번째업무규칙명*/
+              , DTRL5_NM             /*5번째업무규칙명*/
+              , DTRL6_NM             /*6번째업무규칙명*/
+              , NEXTG_FMR_COMN_CD    /**/
+          FROM CCCCCSTE			
+		 WHERE COMN_GRP_CD = #COMN_GRP_CD#
+          ORDER BY SCRN_MRK_SEQ, COMN_CD_NM
+      ]]>
+		</select>
+	</statements>
+	<statements>
+		<select id="WB.SelectCommonCode.SelectCCCMCSTE"  resultClass="WB.DTO.SelectCommonCode_INOUT" parameterclass="WB.DTO.SelectCommonCode_INOUT">
+			<![CDATA[
+        SELECT  HSP_TP_CD
+              , COMN_GRP_CD          /*공통그룹코드*/
+              , COMN_CD              /*공통코드*/
+              , COMN_CD_NM           /*공통코드명*/
+              , COMN_CD_EXPL         /*공통코드설명*/
+              , NVL(SCRN_MRK_SEQ, 999) SCRN_MRK_SEQ        /*화면표시순번*/
+              , USE_YN               /*사용여부*/
+              , DTRL1_NM             /*1번째업무규칙명*/
+              , DTRL2_NM             /*2번째업무규칙명*/
+              , DTRL3_NM             /*3번째업무규칙명*/
+              , DTRL4_NM             /*4번째업무규칙명*/
+              , DTRL5_NM             /*5번째업무규칙명*/
+              , DTRL6_NM             /*6번째업무규칙명*/
+              , NEXTG_FMR_COMN_CD    /**/
+          FROM CCCMCSTE
+          WHERE 1=1
+			AND HSP_TP_CD IN (SELECT TRIM(REGEXP_SUBSTR(#IN_HSP_TP_CD#,'[^'||','||']+',1,LEVEL)) AS TXT
+                                FROM DUAL
+                             CONNECT BY INSTR(#IN_HSP_TP_CD#,',',1,LEVEL-1)>0
+							 )
+			AND COMN_GRP_CD = #COMN_GRP_CD#
+          ORDER BY HSP_TP_CD,SCRN_MRK_SEQ, COMN_CD_NM
+      ]]>
+		</select>
+	</statements>
+	<statements>
+		<select id="WB.SELECT.SelectEQS"  resultClass="WB.DTO.SourceGenerater_INOUT" parameterclass="WB.DTO.SourceGenerater_INOUT">
+			<![CDATA[
+            SELECT QUERYID			     
+			     , QUERYTEXT			    
+              FROM FXQUERYSTORE A
+             WHERE 0=0
+               AND UPPER(QUERYID) = UPPER(#EQS_ID#)
+             ORDER BY QUERYID
+      ]]>
+		</select>
+	</statements>
+	<statements>
+		<select id="WB.SelectEqsDBSource.SelectEQS"  resultClass="WB.DTO.SelectEqsDBSource_INOUT" parameterclass="WB.DTO.SelectEqsDBSource_INOUT">
+			<![CDATA[
+            SELECT QUERYID			     
+			     , QUERYTEXT	
+				 , REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(A.QUERYTEXT,'&'||'amp;','&'),'&'||'lt;','<'),'&'||'gt;','>'),'&'||'apos;',''''),'&'||'amp;','&') REPLACE_QUERY_TEXT
+              FROM FXQUERYSTORE A
+             WHERE 0=0
+               AND UPPER(QUERYID) = UPPER(#EQS_ID#)
+             ORDER BY QUERYID
+      ]]>
+		</select>
+	</statements>
+	<statements>
+		<select id="WB.SelectEqsDBSource.SelectDB" resultClass="WB.DTO.SelectEqsDBSource_INOUT" parameterclass="WB.DTO.SelectEqsDBSource_INOUT">
+			<![CDATA[ 
+
+       SELECT OWNER
+            , NAME
+            , TYPE
+            , LINE
+            , TEXT
+         FROM ALL_SOURCE
+        WHERE NAME = UPPER(#NAME#)
+		  AND TYPE NOT IN ('PACKAGE') /*PACKAGE HEADER는 제외*/		
+		ORDER BY LINE 
+       ]]>
+		</select>
+	</statements>
+	<statements>
+		<select id="WB.SelectEqsDBSource.SelectEQSLike"  resultClass="WB.DTO.SelectEqsDBSource_INOUT" parameterclass="WB.DTO.SelectEqsDBSource_INOUT">
+			<![CDATA[
+            SELECT QUERYID			     
+			     , QUERYTEXT	
+				 , REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(A.QUERYTEXT,'&'||'amp;','&'),'&'||'lt;','<'),'&'||'gt;','>'),'&'||'apos;',''''),'&'||'amp;','&') REPLACE_QUERY_TEXT
+              FROM FXQUERYSTORE A
+             WHERE 0=0
+               AND UPPER(QUERYID) LIKE '%' || UPPER(#EQS_ID#) || '%'
+             ORDER BY QUERYID
+      ]]>
+		</select>
+	</statements>
+	<statements>
+		<select id="WB.SelectEqsDBSource.SelectDBLike" resultClass="WB.DTO.SelectEqsDBSource_INOUT" parameterclass="WB.DTO.SelectEqsDBSource_INOUT">
+			<![CDATA[ 
+
+            SELECT OWNER
+			     , NAME
+                 , TYPE 
+              FROM ALL_SOURCE
+             WHERE NAME LIKE '%' || UPPER(#NAME#) || '%' 
+               AND TYPE  NOT  IN ('PACKAGE') /*PACKAGE HEADER는 제외*/ 
+			 GROUP BY NAME, TYPE , OWNER
+			UNION ALL
+			SELECT OWNER
+			     , VIEW_NAME        NAME
+			     , 'VIEW'           TYPE
+		      FROM ALL_VIEWS
+			 WHERE VIEW_NAME LIKE '%' || UPPER(#NAME#) || '%' 			 
+			 ORDER BY TYPE,NAME
+      
+       ]]>
+		</select>
+	</statements>
+	<statements>
+		<select id="WB.SELECT.SelectPakage"  resultClass="WB.DTO.SourceGenerater_INOUT" parameterclass="WB.DTO.SourceGenerater_INOUT">
+			<![CDATA[ 
+
+          SELECT ARGUMENT_NAME
+               , DATA_TYPE
+               , IN_OUT
+            FROM ALL_ARGUMENTS
+           WHERE (PACKAGE_NAME IS NULL OR PACKAGE_NAME = NVL(#PKG_NAME#, PACKAGE_NAME))
+             AND OBJECT_NAME = upper(#PROC_NAME#)
+           ORDER BY SEQUENCE
+            
+      ]]>
+		</select>
+	</statements>
+
+	<statements>
+		<select id="WB.SELECT.SelectUserInfo"  resultClass="WB.DTO.SelectUserInfo_INOUT" parameterclass="WB.DTO.SelectUserInfo_INOUT">
+			<![CDATA[ 
+                    SELECT A.HSP_TP_CD
+                         , A.STF_NO
+                         , TO_CHAR(A.SID)   SID
+                         , A.KOR_SRNM_NM
+                         , A.AADP_CD
+                         , A.AOA_WKDP_CD
+                         , A.USE_GRP_CD
+                         , A.USE_GRP_DTL_CD
+                         , TO_CHAR(A.OCTY_TP_CD)    OCTY_TP_CD
+                         , B.COMN_CD_NM
+                         , TO_CHAR(A.RTRM_DT, 'YYYY-MM-DD HH24:MI:SS') RTRM_DT
+                         , TO_CHAR(A.LGIN_PWD_LSH_DTM,'YYYY-MM-DD HH24:MI:SS') LGIN_PWD_LSH_DTM
+                      FROM CNLRRUSD A
+                         , CNLRCSTE B
+                     WHERE 1 = 1
+                       AND A.HSP_TP_CD = DECODE(#SEL_HSP_TP_CD#,'ALL',A.HSP_TP_CD,#SEL_HSP_TP_CD#)
+                       AND A.HSP_TP_CD = B.HSP_TP_CD
+                       AND (A.STF_NO LIKE '%' || #IN_STF_NO# || '%'
+                             OR UPPER(KOR_SRNM_NM) LIKE '%' || UPPER(#IN_STF_NO#) || '%'
+                             OR SID LIKE '%' || #IN_STF_NO# || '%'
+                			 )
+                       AND A.OCTY_TP_CD = B.COMN_CD
+                       AND B.COMN_GRP_CD = '005'   
+					ORDER BY A.STF_NO, A.HSP_TP_CD   
+      ]]>
+		</select>
+	</statements>
+
+	<statements>
+		<select id="WB.SELECT.SelectEamInfo"  resultClass="WB.DTO.EAMMenuInfo_INOUT" parameterclass="WB.DTO.EAMMenuInfo_INOUT">
+			<![CDATA[
+        SELECT 
+                BUSINESS_TYP         /*업무구분코드*/
+              , MENU_CD              /*메뉴코드*/
+              , BIZ_MENU_ID          /*업무별메뉴ID*/
+              , MENU_ID              /*메뉴ID*/
+              , MENU_NM              /*메뉴명*/
+              
+              , FOLDER_YN            /*폴더여부*/
+              , UP_MENU_CD           /*상위메뉴코드*/
+              , USE_YN               /*메뉴표시여부*/
+              , SORT_SEQ             /*메뉴정렬순서*/
+              , ASSEMBLY_NM          /*어셈블리명*/
+              , APP_URL              /*페이지경로*/
+              , ICON_URI             /*아이콘경로*/
+              , MENU_TYPE            /*MENU_TYPE*/
+              , DUP_YN               /*중복실행여부*/
+              , MENU_OPEN_TYPE       /*메뉴오픈구분*/
+              , DR_OPEN_TYPE         /*진료메뉴오픈구분*/
+              , NR_OPEN_TYPE         /*간호메뉴오픈구분*/
+              , MS_OPEN_TYPE         /*진료지원메뉴오픈구분*/
+              , PA_OPEN_TYPE         /*원무보험메뉴오픈구분*/
+              , RP_OPEN_TYPE         /*ERP메뉴오픈구분*/
+              , MODAL_YN             /*팝업모달여부*/
+              , WIN_VAL              /*팝업윈도우사이즈*/
+              , TILE_FULL_SIZE_YN    /*타일풀사이즈여부*/
+              , TILE_DEFAULT_SIZE    /*타일기본사이즈*/
+              , TILE_MAX_SIZE        /*타일최대사이즈*/
+              , TILE_MIN_SIZE        /*타일최소사이즈*/
+              , SEARCH_DEFAULT_DURATION /*기본조회기간*/
+              , SEARCH_MAX_DURATION  /*최대조회기간*/
+              , PATIENT_INFO_YN      /*환자정보포함여부*/
+              , PRIVATE_INFO_YN      /*개인정보포함여부*/
+              , MEDICAL_RECORD_YN    /*의무기록포함여부*/
+              , ELECTRONIC_SIGNATURE_YN /*전자서명여부*/
+              , DISP_YN              /*조회여부*/
+              , ACTIVE_YN            /*액티브환자조회여부*/
+              , APPROVE_YN           /*APPROVE_YN*/
+              , SYS_CD               /*시스템코드*/
+              , USE_STR_DTM          /*사용시작일시*/
+              , USE_END_DTM          /*사용종료일시*/
+              , POPUP_ONLY_YN        /*팝업전용여부*/
+              , QCK_MENU_YN          /*퀵메뉴여부*/
+              , REPORT_YN            /*리포트여부*/
+              , AUTH_CHECK_YN        /*권한체크여부*/
+              , TITLE_DISP_YN        /*타이틀표시여부*/
+              , PT_INFO_NEED_TYPE    /*환자정보필요타입*/
+              , SCALE_DISP_YN        /*배율표시여부*/
+              , KOR_FILE_NM          /*한글파일명*/
+              , OGCP_FILE_PATH       /*원본파일경로*/
+              , EMPL_FILE_PATH       /*보기파일경로*/
+              , FILE_LTH             /*파일길이*/
+              , REPEAT_SHOW_HIDE     /*되풀이유형*/
+              , REPEAT_YEAR_MONTH    /*되풀이방법*/
+              , REPEAT_START         /*되풀이시작*/
+              , REPEAT_END           /*되풀이종료*/
+              , PAGE_USAGE_RMKS      /*페이지사용 비고*/
+              , AGGR_EXCEPT_YN       /*집계제외필요*/
+              , DEPLOY_START_DTM     /*화면운영시작일자*/
+              , MENU_DESC            /*Service description*/
+          FROM EMBUMENT
+          WHERE upper(MENU_CD) LIKE '%' || upper(#MENU_CD#) || '%'
+             OR upper(MENU_NM) LIKE '%' || upper(#MENU_CD#) || '%'
+			 OR upper(ASSEMBLY_NM) LIKE '%' || upper(#MENU_CD#) || '%'
+			 OR upper(APP_URL) LIKE '%' || upper(#MENU_CD#) || '%'
+	      ORDER BY BUSINESS_TYP, MENU_CD
+      ]]>
+		</select>
+	</statements>
+	<statements>
+		<select id="WB.SelectDBSourceFinder.SelectDBSource"  resultClass="WB.DTO.SelectDBSourceFinder_INOUT" parameterclass="WB.DTO.SelectDBSourceFinder_INOUT">
+			<![CDATA[
+            SELECT NAME,TYPE,OWNER,REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(A.ORA_SQL,'&'||'amp;','&'),'&'||'lt;','<'),'&'||'gt;','>'),'&'||'apos;',''''),'&'||'amp;','&') QUERYTEXT
+                FROM(
+            SELECT NAME,TYPE,OWNER,XMLAGG(XMLELEMENT(A,'' || TEXT) ORDER BY LINE).EXTRACT('//text()').GETCLOBVAL() ORA_SQL
+                FROM ALL_SOURCE A
+                WHERE 1=1
+                    AND EXISTS(SELECT 1
+                                FROM ALL_SOURCE
+                                WHERE NAME= A.NAME
+                                AND UPPER(TEXT) LIKE '%' || UPPER(#TEXT#) ||'%'
+                            )
+            GROUP BY NAME,TYPE,OWNER
+            ) A
+            ORDER BY NAME
+            ]]>
+		</select>
+	</statements>
+    <statements>
+	    <select id="WB.SelectDBSourceFinder.SelectDBSource2"  resultClass="WB.DTO.SelectDBSourceFinder_INOUT" parameterclass="WB.DTO.SelectDBSourceFinder_INOUT">
+		    <![CDATA[
+            SELECT NAME,TYPE,OWNER,REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(A.ORA_SQL,'&'||'amp;','&'),'&'||'lt;','<'),'&'||'gt;','>'),'&'||'apos;',''''),'&'||'amp;','&') QUERYTEXT
+                FROM(
+            SELECT NAME,TYPE,OWNER,XMLAGG(XMLELEMENT(A,'' || REGEXP_REPLACE(TEXT, '[^[:print:]]', CHR(10))) ORDER BY LINE).EXTRACT('//text()').GETCLOBVAL() ORA_SQL
+                FROM ALL_SOURCE A
+                WHERE 1=1
+                    AND EXISTS(SELECT 1
+                                FROM ALL_SOURCE
+                                WHERE NAME= A.NAME
+                                AND UPPER(TEXT) LIKE '%' || UPPER(#TEXT#) ||'%'
+                            )
+            GROUP BY NAME,TYPE,OWNER
+            ) A
+            ORDER BY NAME
+            ]]>
+	    </select>
+    </statements>
+	<statements>
+		<select id="WB.SelectDBSourceFinder.SelectEQSSource"  resultClass="WB.DTO.SelectDBSourceFinder_INOUT" parameterclass="WB.DTO.SelectDBSourceFinder_INOUT">
+			<![CDATA[
+            SELECT QUERYID  NAME
+				 , REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(A.QUERYTEXT,'&'||'amp;','&'),'&'||'lt;','<'),'&'||'gt;','>'),'&'||'apos;',''''),'&'||'amp;','&') QUERYTEXT
+              FROM FXQUERYSTORE A
+             WHERE 0=0
+               AND UPPER(QUERYTEXT) LIKE '%' || upper(#TEXT#) || '%'
+             ORDER BY QUERYID
+      ]]>
+		</select>
+	</statements>
+</sqlMap>

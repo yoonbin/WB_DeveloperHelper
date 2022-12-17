@@ -1,0 +1,64 @@
+﻿<uc:UCBase   xmlns:uc="clr-namespace:WB.UC"
+             x:Class="WB.SelectMyMemo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"  
+             xmlns:b="clr-namespace:WB.Common"
+             xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+             xmlns:local="clr-namespace:WB"
+             mc:Ignorable="d" 
+             x:Name="ucTextRichBox"
+             d:DesignHeight="850" d:DesignWidth="1500"
+             >
+    <uc:UCBase.DataContext>
+        <local:SelectMyMemoData/>
+    </uc:UCBase.DataContext>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="RECOURCE_DICTIONARY/ResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <b:BindingProxy x:Key="proxy" DataContext="{Binding}"/>
+            <b:VisibleConverterV3 x:Key="VisConv"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Grid Background="{StaticResource SearchAreaAliceBorderBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="Black" BorderThickness="1,1,0,1">
+            <DockPanel LastChildFill="False">
+                <TextBlock Text="검색어" Style="{StaticResource DefaultTextBlock}"/>
+                <TextBox x:Name="searchText" Style="{StaticResource DefaultTextBox}" Padding="0,2,0,2" Width="200" VerticalAlignment="Center" KeyDown="searchText_KeyDown_1" AcceptsReturn="False" InputMethod.PreferredImeState="On" InputMethod.PreferredImeConversionMode="Alphanumeric"/>
+                <Button Style="{StaticResource btnDefault}" VerticalAlignment="Center"  Content="조회" Width="60" Click="TextSearch"/>
+                <TextBlock Text="※ 찾은건수 : " Style="{StaticResource DefaultTextBlock}"/>
+                <TextBlock x:Name="txtSearchCnt" Style="{StaticResource DefaultTextBlock}" Foreground="DarkRed" FontWeight="Bold"/>
+                <TextBlock Text="    ※ F3 : 조회 된 단어를 찾아갑니다. " Style="{StaticResource DefaultTextBlock}"/>
+                <TextBlock Text="    ※ 검색어 조회시 읽기모드, 우클릭시 편집모드." Style="{StaticResource DefaultTextBlock}"/>
+                <TextBlock Text="    ※ 현재상태 : " Style="{StaticResource DefaultTextBlock}" Foreground="DarkRed" FontWeight="Bold"/>
+                <TextBlock Text="{Binding EDIT_READ, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource DefaultTextBlock}" Foreground="DarkRed" FontWeight="Bold"/>
+            </DockPanel>
+        </Border>
+        <TextBox x:Name="txtTextCode" Grid.Row="1" Visibility="{Binding EDIT_READ, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource VisConv}, ConverterParameter='EDIT'}" 
+                 b:TextBoxBehavior.SelectAllTextOnFocus="True" AcceptsReturn="True" FontFamily="Courier New" Padding="3,5,0,0" LostFocus="txtCode_LostFocus" AcceptsTab="True"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" Text="{Binding ElementName=ucTextRichBox, Path=Text,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                 MaxLines="9999999" TextChanged="txtTextCode_TextChanged"/>
+        <RichTextBox Visibility="{Binding EDIT_READ, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay ,Converter={StaticResource VisConv}, ConverterParameter='READ'}" Grid.Row="1" 
+                     x:Name="txtCode" AcceptsTab="False" LostFocus="txtCode_LostFocus" IsReadOnly="True" MouseRightButtonUp="txtCode_MouseRightClick" Padding="0,5,0,0" 
+                     ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" FontFamily="Courier New" Background="#FFF4F4F5">
+            <!--<RichTextBox.CommandBindings>
+                <CommandBinding Command="{x:Static ApplicationCommands.Paste}" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed"/>
+            </RichTextBox.CommandBindings>-->
+            <RichTextBox.Resources>
+                <Style TargetType="{x:Type Paragraph}">
+                    <Setter Property="Margin" Value="0"/>
+                </Style>
+            </RichTextBox.Resources>
+        </RichTextBox>
+    </Grid>
+   
+</uc:UCBase>

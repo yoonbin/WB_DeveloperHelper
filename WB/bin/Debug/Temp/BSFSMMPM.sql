@@ -1,0 +1,5 @@
+﻿SELECT A.*
+  FROM BSFSMMPM A --환자이송요원직원기본
+ WHERE 1=1
+   AND ROWNUM < 100
+;

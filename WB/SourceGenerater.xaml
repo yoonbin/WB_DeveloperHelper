@@ -1,0 +1,145 @@
+﻿<uc:UCBase   xmlns:uc="clr-namespace:WB.UC"
+             x:Class="WB.SourceGenerater"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"  
+             xmlns:b="clr-namespace:WB.Common"
+             xmlns:local="clr-namespace:WB"
+             Loaded="UCBase_Loaded_1"
+             mc:Ignorable="d"              
+             d:DesignHeight="850" d:DesignWidth="1500">
+    <uc:UCBase.DataContext>
+        <local:SourceGeneraterData/>
+    </uc:UCBase.DataContext>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="RECOURCE_DICTIONARY/ResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <b:BindingProxy x:Key="proxy" DataContext="{Binding}"/>
+            <b:VisibleConverter x:Key="VisiConv"/>
+            <b:VisibleConverterV2 x:Key="VisiConvV2"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Background="{StaticResource SearchAreaAliceBorderBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="11*"/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="Black" BorderThickness="1,1,1,0" Background="LightGray">
+            <Border BorderBrush="Gray" BorderThickness="1,1,1,1" >
+                <DockPanel LastChildFill="False">
+                    <TextBlock Text="EQS Query" Style="{StaticResource DefaultTextBlock}"/>
+                    <TextBox x:Name="txtEqs" Width="500" Style="{StaticResource WatermarkTextBox}" Tag="EQS ID를 입력해 주세요." Text="{Binding EQS_ID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                             TextChanged="txtEqs_TextChanged" AcceptsReturn="False" KeyDown="txtEqs_KeyDown"/>
+                    <TextBox x:Name="txtProcedure" Width="492" Style="{StaticResource WatermarkTextBox}" Tag="PAKAGE_NAME" Text="{Binding PKG_NM, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                             />
+                    <Button Style="{StaticResource SearchButton}" Content="HDataGridEx" Click="Button_Click_1" Padding="0,4,0,4"/>
+                </DockPanel>
+            </Border>
+        </Border>
+        <Grid Grid.Row="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition Width="0.6*"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black"  Background="{StaticResource LightAreaBorderBrush}">
+                    <Border BorderBrush="Gray" BorderThickness="1,1,1,1" >
+                        <DockPanel LastChildFill="False">
+                            <TextBox Width="564" Style="{StaticResource WatermarkTextBox}" Tag="IN DTO Type Name" Text="{Binding IN_DTO, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextChanged="txtEqs_TextChanged" Visibility="{Binding DTO_SYNC ,Converter={StaticResource VisiConv }}" KeyDown="txtEqs_KeyDown" AcceptsReturn="False"/>
+                            <TextBox Width="564" Style="{StaticResource WatermarkTextBox}" Tag="INOUT DTO Type Name" Text="{Binding INOUT_DTO, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextChanged="txtEqs_TextChanged"  Visibility="{Binding DTO_SYNC ,Converter={StaticResource VisiConvV2 }}" KeyDown="txtEqs_KeyDown" AcceptsReturn="False"/>
+                        </DockPanel>
+                    </Border>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black"  Background="{StaticResource LightAreaBorderBrush}">
+                    <Border BorderBrush="Gray" BorderThickness="1,1,1,1" >
+                        <DockPanel LastChildFill="False">
+                            <TextBox Width="564" Style="{StaticResource WatermarkTextBox}" Tag="OUT DTO Type Name" Text="{Binding OUT_DTO, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextChanged="txtEqs_TextChanged"  Visibility="{Binding DTO_SYNC ,Converter={StaticResource VisiConv }}" KeyDown="txtEqs_KeyDown" AcceptsReturn="False"/>
+                            <TextBox Width="564" Style="{StaticResource WatermarkTextBox}" Tag="INOUT DTO Type Name" Text="{Binding INOUT_DTO, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" TextChanged="txtEqs_TextChanged" Visibility="{Binding DTO_SYNC ,Converter={StaticResource VisiConvV2 }}" KeyDown="txtEqs_KeyDown" AcceptsReturn="False"/>
+                        </DockPanel>
+                    </Border>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="1" BorderBrush="Black"  Background="{StaticResource LightAreaBorderBrush}">
+                    <Border BorderBrush="Gray" BorderThickness="1,1,1,1" >
+                        <DockPanel LastChildFill="False">
+                            <TextBox Width="300" Style="{StaticResource WatermarkTextBox}" Tag="주석 설명" Text="{Binding SUMMARY_DESC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="txtEqs_TextChanged" AcceptsReturn="False" KeyDown="txtEqs_KeyDown" />
+                            <Button x:Name="btnSearch" Style="{StaticResource btnDefault}" FontSize="15"  Content="조회" VerticalAlignment="Center" Margin="0,0,5,0" Width="50" Click="Button_Click"/>
+                            <CheckBox Content="IN_OUT 동기화" VerticalAlignment="Center" IsChecked="{Binding DTO_SYNC, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <CheckBox VerticalAlignment="Center" Content="Meta정보 제외" Margin="5,0,0,0" IsChecked="{Binding USERINFO.EXCN_META ,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Command="{Binding SaveExcnMetaCommand}"/>
+                        </DockPanel>
+                    </Border>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" Background="{StaticResource LightAreaBorderBrush}">
+                    <Border BorderBrush="Gray" BorderThickness="1,1,1,1" >
+                        <DockPanel LastChildFill="False">
+                            <RadioButton Content="List : HSFDTOCollectionBaseObjectDTO" VerticalAlignment="Center" Margin="5,0,0,0" IsChecked="True" GroupName="rdoMode" x:Name="rdoCollection"/>
+                            <RadioButton x:Name="rdo1Raw" Content="1 Row : DTO" VerticalAlignment="Center" Margin="5,0,0,0" GroupName="rdoMode"/>
+                            <RadioButton x:Name="rdoList" Content="List: List DTO" VerticalAlignment="Center" Margin="5,0,0,0" GroupName="rdoMode"/>
+                        </DockPanel>
+                    </Border>
+                </Border>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.25*"/>
+                <ColumnDefinition Width="0.25*"/>
+                <ColumnDefinition Width="0.25*"/>
+                <ColumnDefinition Width="0.25*"/>
+            </Grid.ColumnDefinitions>
+            <DockPanel x:Name="dockPanel1" LastChildFill="True">
+                <TextBlock Text="Interface source code" Style="{StaticResource DefaultTextBlock}" DockPanel.Dock="Top" Margin="5,5,0,0"/>
+                <TextBox x:Name="txtDock1" Style="{StaticResource DefaultTextBoxV2}" Text="{Binding IF_TEXT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+            </DockPanel>
+
+            <DockPanel LastChildFill="True" Grid.Column="1">
+                <TextBlock x:Name="dockPanel2" Text="BIZ source code" Style="{StaticResource DefaultTextBlock}" DockPanel.Dock="Top" Margin="5,5,0,0"/>
+                <TextBox x:Name="txtDock2" Style="{StaticResource DefaultTextBoxV2}" Text="{Binding BIZ_TEXT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+            </DockPanel>
+
+            <DockPanel x:Name="dockPanel3" LastChildFill="True" Grid.Column="2">
+                <TextBlock Text="DL source code" Style="{StaticResource DefaultTextBlock}" DockPanel.Dock="Top" Margin="5,5,0,0"/>
+                <TextBox x:Name="txtDock3" Style="{StaticResource DefaultTextBoxV2}" Text="{Binding DL_TEXT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+            </DockPanel>
+
+            <DockPanel x:Name="dockPanel4" LastChildFill="True" Grid.Column="3">
+                <TextBlock Text="DTO source code (Procedure일 경우 매개변수)" Style="{StaticResource DefaultTextBlock}" DockPanel.Dock="Top" Margin="5,5,0,0"/>
+                <TextBox x:Name="txtDock4" Style="{StaticResource DefaultTextBoxV2}" Text="{Binding DTO_TEXT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+            </DockPanel>
+
+            <DockPanel x:Name="dockPanel5" LastChildFill="True" Grid.Row="1" >
+                <TextBlock Text="Property source code (조회쿼리만)" Style="{StaticResource DefaultTextBlock}" DockPanel.Dock="Top" Margin="5,5,0,0"/>
+                <TextBox x:Name="txtDock5" Style="{StaticResource DefaultTextBoxV2}" Text="{Binding PROPERTY_TEXT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+            </DockPanel>
+
+            <DockPanel x:Name="dockPanel6" LastChildFill="True" Grid.Row="1"  Grid.Column="1">
+                <TextBlock Text="Method source code" Style="{StaticResource DefaultTextBlock}" DockPanel.Dock="Top" Margin="5,5,0,0"/>
+                <TextBox x:Name="txtDock6" Style="{StaticResource DefaultTextBoxV2}" Text="{Binding METHOD_TEXT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+            </DockPanel>
+
+            <DockPanel x:Name="dockPanel7" LastChildFill="True" Grid.Row="1" Grid.Column="2">
+                <TextBlock Text="ICommand source code" Style="{StaticResource DefaultTextBlock}" DockPanel.Dock="Top" Margin="5,5,0,0"/>
+                <TextBox x:Name="txtDock7" Style="{StaticResource DefaultTextBoxV2}" Text="{Binding COMMAND_TEXT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            </DockPanel>
+
+            <DockPanel x:Name="dockPanel8" LastChildFill="True" Grid.Row="1"  Grid.Column="3">
+                <TextBlock Text="Interface source code" Style="{StaticResource DefaultTextBlock}" DockPanel.Dock="Top" Margin="5,5,0,0"/>
+                <TextBox x:Name="txtDock8" Style="{StaticResource DefaultTextBoxV2}" />
+            </DockPanel>
+        </Grid>
+    </Grid>
+</uc:UCBase>

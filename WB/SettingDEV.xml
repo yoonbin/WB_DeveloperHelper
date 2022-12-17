@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfDBUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DBUser>
+    <BASE_STATE />
+    <USER_NAME>XSUP_PROD</USER_NAME>
+    <CONNECT_STRING>Data Source=ESMARTPROD;User Id=xsup;Password=!cnsupn2022);Integrated Security=no</CONNECT_STRING>
+  </DBUser>
+</ArrayOfDBUser>

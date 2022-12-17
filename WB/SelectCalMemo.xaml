@@ -1,0 +1,88 @@
+﻿<uc:UCBase   xmlns:uc="clr-namespace:WB.UC"
+             x:Class="WB.SelectCalMemo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"  
+             xmlns:b="clr-namespace:WB.Common"
+             xmlns:local="clr-namespace:WB"
+             mc:Ignorable="d" 
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             d:DesignHeight="850" d:DesignWidth="1500">
+    <uc:UCBase.DataContext>
+        <local:SelectCalMemoData/>
+    </uc:UCBase.DataContext>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="RECOURCE_DICTIONARY/ResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <b:BindingProxy x:Key="proxy" DataContext="{Binding}"/>
+            <b:SelectDateToString x:Key="DateConv"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Background="{StaticResource SearchAreaAliceBorderBrush}" x:Name="grdMain">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.15*"/>
+            <ColumnDefinition Width="7"/>
+            <ColumnDefinition Width="0.7*"/>
+        </Grid.ColumnDefinitions>
+        <Border>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.3*"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="0.7*"/>
+                </Grid.RowDefinitions>
+                <Border BorderBrush="{StaticResource DarkAreaBorderBrush}" BorderThickness="1,1,1,1">
+                    <Calendar x:Name="calMemo" b:CalendarAttachedProperties.RegisterBlackoutDates="{Binding HOLIDAY,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Style="{StaticResource styleCalendar}"
+                              SelectedDate="{Binding SEL_MEMO_DATE, UpdateSourceTrigger=PropertyChanged , Mode=TwoWay ,Converter={StaticResource DateConv}}" PreviewMouseUp="calMemo_PreviewMouseUp"
+                              DisplayDate="{Binding SEL_MEMO_DATE,UpdateSourceTrigger=PropertyChanged, Mode=OneTime}" CalendarDayButtonStyle="{StaticResource styCalendarDay}"
+                             >
+                       
+                    </Calendar>
+                </Border>
+                <Border Grid.Row="1"  BorderBrush="{StaticResource DarkAreaBorderBrush}" BorderThickness="1,0,1,0">
+                    <DockPanel LastChildFill="False">
+                        <Border BorderThickness="1,0,0,0" BorderBrush="YellowGreen" Margin="5,0,0,0"/>
+                        <CheckBox VerticalAlignment="Center" Content="오늘이후만 조회" Margin="5,0,0,0" x:Name="chkToday" Checked="chkToday_Checked" Unchecked="chkToday_Unchecked" IsChecked="True"/>
+                        <Button Style="{StaticResource btnDefault}" Content="오늘" VerticalAlignment="Center" Margin="0,0,5,0" Width="50" DockPanel.Dock="Right" Click="Button_Click"/>
+                        <!--<DatePicker DockPanel.Dock="Right" SelectedDate="" Margin="0,2,0,2" Height="26"/>--> 
+                    </DockPanel>
+                </Border>
+                <Border Grid.Row="2"  BorderBrush="{StaticResource DarkAreaBorderBrush}" BorderThickness="1,1,1,1">
+                    <!--컬럼타입 I : DataGridTextColumn-->
+                    <DataGrid x:Name="dgrdMemoList" Grid.Row="0" Margin="0,5,0,0" HeadersVisibility="All"  SelectionMode="Single" ItemsSource="{Binding USERINFO.MY_CAL_LIST}" RowHeight="18"
+                              AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" MouseUp="DataGrid_MouseUp" HorizontalGridLinesBrush="{StaticResource SearchAreaLightBorderBrush}" VerticalGridLinesBrush="{StaticResource SearchAreaLightBorderBrush}">
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="일정삭제" Click="MenuItem_Click"/>
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                        <!--컬럼 시작-->
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="MEMO_DATE" Width="120" Binding="{Binding MEMO_DATE, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <DataGridTextColumn Header="MEMO_TEXT" Width="*" Binding="{Binding MEMO_TEXT, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  >
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="ToolTip" Value="{Binding Path=MEMO_TEXT}"/>
+                                        <Setter Property="ToolTipService.ShowDuration" Value="{x:Static Member=sys:Int32.MaxValue}"/>
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                        
+                        <!--컬럼 끝-->
+                    </DataGrid>
+                    <!--컬럼타입 I : DataGridTextColumn-->
+                </Border>
+            </Grid>
+        </Border>
+        <GridSplitter Grid.Column="1" Style="{StaticResource VerGridSplitter}" PreviewMouseDoubleClick="GridSplitter_MouseDoubleClick" Margin="2,0,2,0" />
+        <Border Grid.Column="2">
+            <local:SelectMyMemo x:Name="txtMemo" Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type FrameworkElement}} ,Path=DataContext.SEL_MEMO_TEXT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FocusPosition="TextBox" LostFocused="SelectMyMemo_LostFocus"
+                                />
+        </Border>
+    </Grid>
+</uc:UCBase>

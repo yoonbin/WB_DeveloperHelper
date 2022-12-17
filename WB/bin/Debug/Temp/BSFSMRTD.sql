@@ -1,0 +1,5 @@
+﻿SELECT A.*
+  FROM BSFSMRTD A --환자안전관리보고서정보
+ WHERE 1=1
+   AND ROWNUM < 100
+;

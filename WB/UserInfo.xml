@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UserInfo_INOUT xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<BASE_STATE/>
+	<FAVEAMINFO_LIST/>
+	<HSP_TP_CD>01</HSP_TP_CD>
+	<STF_NO>CCC0EMR</STF_NO>
+	<DB_INFO>PROD</DB_INFO>
+</UserInfo_INOUT>

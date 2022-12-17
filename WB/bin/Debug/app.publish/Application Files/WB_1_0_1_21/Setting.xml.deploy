@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfBasicSetting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<BasicSetting>
+		<CODE>UserName</CODE>
+		<PROPERTY>사용자이름</PROPERTY>
+		<VALUE>ezCaretech 오원빈</VALUE>
+		<REMARK>소스코드의 Author</REMARK>
+	</BasicSetting>
+	<BasicSetting>
+		<CODE>MetaConnectionString</CODE>
+		<PROPERTY>Meta# Connection String</PROPERTY>
+		<VALUE>Data Source=CNUHDEV;User Id=UDATAWARE;Password=dataware;Integrated Security=no</VALUE>
+		<REMARK>Meta#정보 연동을 위해 필요함</REMARK>
+	</BasicSetting>
+	<BasicSetting>
+		<CODE>BESTCareDevPath</CODE>
+		<PROPERTY>BESTCare Dev 경로</PROPERTY>
+		<VALUE>C:\BESTCare\CNUH\HISDEV</VALUE>
+		<REMARK>EAM탭에서 화면보기시 사용</REMARK>
+	</BasicSetting>
+	<BasicSetting>
+		<CODE>BESTCareStgPath</CODE>
+		<PROPERTY>BESTCare Stg 경로</PROPERTY>
+		<VALUE>C:\BESTCare\CNUH\HISSTG</VALUE>
+		<REMARK>EAM탭에서 화면보기시 사용</REMARK>
+	</BasicSetting>
+	<BasicSetting>
+		<CODE>BESTCareProdPath</CODE>
+		<PROPERTY>BESTCare Prod 경로</PROPERTY>
+		<VALUE>C:\BESTCare\CNUH\HIS</VALUE>
+		<REMARK>EAM탭에서 화면보기시 사용</REMARK>
+	</BasicSetting>
+	<BasicSetting>
+		<CODE>GoldenPath</CODE>
+		<PROPERTY>Golden 경로</PROPERTY>
+		<VALUE>C:\Program Files\Benthic\Golden6.exe</VALUE>
+		<REMARK>EQS/DB Object 소스보기시 사용</REMARK>
+	</BasicSetting>
+	<BasicSetting>
+		<CODE>PLEditPath</CODE>
+		<PROPERTY>PLEdit 경로</PROPERTY>
+		<VALUE>C:\Program Files\Benthic\PLEdit32.exe</VALUE>
+		<REMARK>EQS/DB Object 소스보기시 사용</REMARK>
+	</BasicSetting>
+</ArrayOfBasicSetting>

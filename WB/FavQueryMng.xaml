@@ -1,0 +1,89 @@
+﻿<uc:UCBase  xmlns:uc="clr-namespace:WB.UC" x:Class="WB.FavQueryMng"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WB"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             Loaded="UserControl_Loaded"
+             KeyUp="UserControl_KeyUp"
+             d:DesignHeight="450" d:DesignWidth="1800">
+    <!--<UserControl.DataContext>
+        <local:ViewModelBase/>
+    </UserControl.DataContext>-->
+    <UserControl.Resources>
+        <ResourceDictionary Source="RECOURCE_DICTIONARY/ResourceDictionary.xaml">
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid x:Name="grdMain">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="6*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.ColumnSpan="3" Orientation="Horizontal" Background="{StaticResource LightAreaBorderBrush}">
+            <TextBlock Text="검색어" VerticalAlignment="Center" Margin="5,0,0,0"/>
+            <TextBox x:Name="txtSearchQuery" Width="200" VerticalAlignment="Center" Margin="5,0,0,0" TextChanged="txtSearchQuery_TextChanged"/>
+        </StackPanel>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border BorderBrush="Gray" BorderThickness="0,1,1,0">
+            <DockPanel LastChildFill="False" Background="White">
+                <Button Content="+" Width="20" Margin="0,0,5,0" DockPanel.Dock="Left" Background="{StaticResource SearchAreaBackground}" VerticalAlignment="Center"    Click="BtnAdd_Click"/>
+                <Button Content="-" Width="20" Margin="0,0,5,0" DockPanel.Dock="Left" Background="{StaticResource SearchAreaBackground}" VerticalAlignment="Center"    Click="BtnDelete_Click"/>
+                <Button Content="저장" DockPanel.Dock="Left" Width="50"  Style="{StaticResource CommonButtonSaveStyle}"  VerticalAlignment="Center" Margin="0,0,5,0" Click="BtnSave_Click"/>
+                <Button Width="22" Height="20" Margin="0,0,5,0" DockPanel.Dock="Right" Style="{StaticResource CommonButtonRefreshStyle}" VerticalAlignment="Center"  HorizontalAlignment="Center"  Click="BtnReload_Click"/>
+                <Button Content="▲" Width="20" Margin="0,0,5,0" DockPanel.Dock="Right" Background="{StaticResource SearchAreaBackground}" VerticalAlignment="Center"    Click="BtnUp_Click"/>
+                <Button Content="▼" Width="20" Margin="0,0,5,0" DockPanel.Dock="Right" Background="{StaticResource SearchAreaBackground}" VerticalAlignment="Center"    Click="BtnDown_Click"/>
+            </DockPanel>
+            </Border>
+            
+            <DataGrid Grid.Row="1" x:Name="dgrdQuery" SelectionChanged="dgrdQuery_SelectionChanged" HorizontalScrollBarVisibility="Disabled" AutoGenerateColumns="False" CanUserAddRows="False"
+                                   HorizontalGridLinesBrush="{StaticResource SearchAreaAliceBorderBrush}" VerticalGridLinesBrush="{StaticResource SearchAreaAliceBorderBrush}">
+                <DataGrid.ContextMenu>
+                    <ContextMenu ItemsSource="{Binding USERINFO.CATEGORY}">
+                        <ContextMenu.ItemContainerStyle>
+                            <Style TargetType="MenuItem">
+                                <Setter Property="Header" Value="{Binding Path=CATEGORY}"/>
+                                <Setter Property="Command" Value="{Binding}"/>
+                            </Style>
+                        </ContextMenu.ItemContainerStyle>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="QUERY_NAME" Binding="{Binding QUERY_NAME}" Width="*">
+                        <DataGridTextColumn.CellStyle>
+                            <Style TargetType="{x:Type DataGridCell}">
+                                <Setter Property="ToolTip" Value="{Binding QUERY_NAME}"/>
+                                <Setter Property="ToolTipService.ShowDuration" Value="{x:Static Member=sys:Int32.MaxValue}"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="QUERY_TEXT" Binding="{Binding QUERY_TEXT}" Width="*" Visibility="Collapsed"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <GridSplitter Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Width="5" Style="{StaticResource VerGridSplitter}" PreviewMouseDoubleClick="GridSplitter_MouseDoubleClick" Margin="2,0,2,0"/>
+        <Grid Grid.Row="1" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border BorderBrush="Gray" BorderThickness="0,1,1,0">
+                <DockPanel LastChildFill="False" Background="White">
+                    <Button Content="Restore" Width="100" Margin="0,0,5,0" DockPanel.Dock="Right" Background="{StaticResource SearchAreaBackground}" VerticalAlignment="Center"    Click="BtnRestoreXml_Click"/>
+                    <Button Content="DownLoad" DockPanel.Dock="Right" Width="100" Background="{StaticResource SearchAreaBackground}" VerticalAlignment="Center" Margin="0,0,5,0" Click="BtnBackupXml_Click"/>
+                </DockPanel>
+            </Border>
+            <TextBox  Grid.Row="1" x:Name="txtQuery" Grid.Column="2" MaxLines="9999999" AcceptsReturn="True" TextChanged="txtQuery_TextChanged"/>
+        </Grid>
+    </Grid>
+</uc:UCBase>
